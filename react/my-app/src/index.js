@@ -11,16 +11,16 @@ class Block extends React.Component {
 	};
 
 	edit = () => {
-		this.setState ({edit: true});
+		this.setState({ edit: true });
 	};
 
 	save = () => {
-		this.props.update (this.refs.txt.value, this.props.index);
-		this.setState ({edit: false})
+		this.props.update(this.refs.txt.value, this.props.index);
+		this.setState({ edit: false })
 	};
 
 	remove = () => {
-		this.props.deleteBlock (this.props.index);
+		this.props.deleteBlock(this.props.index);
 	};
 
 	rendNorm = () => {
@@ -44,11 +44,11 @@ class Block extends React.Component {
 
 	render() {
 		if (this.state.edit) {
-				return this.rendEdit ();
-			} else {
-				return this.rendNorm ();
-			}
+			return this.rendEdit();
+		} else {
+			return this.rendNorm();
 		}
+	}
 }
 
 class Registry extends React.Component {
@@ -64,24 +64,24 @@ class Registry extends React.Component {
 	};
 
 	add = () => {
-	//	var foo = "notdefault";
-	//	this.setState ({adding: foo});
+		//	let foo = "notdefault";
+		//	this.setState ({adding: foo});
 		document.getElementById('inputFile').click();
-	//	var arr = this.state.docs;
-	//	arr.unshift( this.state.adding);
-	//	this.setState ({docs: arr});
+		//	let arr = this.state.docs;
+		//	arr.unshift( this.state.adding);
+		//	this.setState ({docs: arr});
 	};
 
 	deleteBlock = (i) => {
-		var arr = this.state.docs;
-		arr.splice (i, 1);
-		this.setState ({docs: arr});
+		let arr = this.state.docs;
+		arr.splice(i, 1);
+		this.setState({ docs: arr });
 	};
 
 	updateText = (text, i) => {
-		var arr = this.state.docs;
+		let arr = this.state.docs;
 		arr[i] = text;
-		this.setState ({docs: arr});
+		this.setState({ docs: arr });
 	};
 
 	each = (item, i) => {
@@ -92,29 +92,33 @@ class Registry extends React.Component {
 		);
 	};
 
-	 readFile = () => {
-           var selectedFile = document.getElementById('inputFile').files[0];
-           var reader = new FileReader
-                      reader.onload = function (e) {
-             var FileContent = e.target.result;
-						 alert(FileContent);
-						 return FileContent;
-           };
-					 var arr = this.state.docs;
-					 arr.unshift( reader.readAsText(selectedFile));
-					 this.setState ({docs: arr})
-         }
+	readFile = () => {
+		let selectedFile = document.getElementById('inputFile').files[0];
+		let reader = new FileReader()
+		let arr = this.state.docs;
+		let that = this
+
+
+		reader.readAsText(selectedFile);
+
+		reader.onload = function (e) {
+			let FileContent = e.target.result;
+			arr.unshift(FileContent)
+			console.log(arr)
+			that.setState({ docs: arr })
+		};
+	}
 
 	render() {
 		return (
 			<div className="field">
-			<input hidden id="inputFile" type="file"  onChange={this.readFile}></input>
-			<button onClick={this.add}  className="btn add">Додати</button>
-				{this.state.docs.map (this.each)}
+				<input hidden id="inputFile" type="file" onChange={this.readFile}></input>
+				<button onClick={this.add} className="btn add">Додати</button>
+				{this.state.docs.map(this.each)}
 			</div>
 		);
 	}
 }
 
-ReactDOM.render(<Registry />,document.getElementById('root')
+ReactDOM.render(<Registry />, document.getElementById('root')
 );
