@@ -1,0 +1,62 @@
+#fileInput {
+	display:none;
+}
+
+.field {
+  display: flex;
+  padding: 10px;
+  width: 25%;
+  margin-left: 37.5%;
+  color: #fff;
+  font-size: 1.3em;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box {
+  border: 2px solid #666;
+  background-color: #aaa;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 80%;
+}
+
+.box:last-child {
+  margin-bottom: 0;
+}
+
+textarea{
+  padding: 10px;
+}
+
+button.btn {
+  margin-right: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 0.65em;
+  color: #fff;
+  outline: none;
+}
+
+.btn.light {
+  background-color: #4eafc9;
+  border: 2px solid #2a89a2;
+}
+
+.btn.red {
+  background-color: #dda66d;
+  border: 2px solid #b6821a;
+}
+
+.btn.success{
+  margin: 10px;
+  background-color: #029711;
+  border: 2px solid #01580a;
+}
+
+.btn.add{
+  margin: 10px;
+  background-color: #b3b911;
+  border: 2px solid #9a9e0b;
+}
