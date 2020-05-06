@@ -103,7 +103,7 @@ class Registry extends React.Component {
 
 		reader.onload = function (e) {
 			let FileContent = e.target.result;
-			arr.unshift(FileContent)
+			arr.push(FileContent)
 			console.log(arr)
 			that.setState({ docs: arr })
 		};
@@ -114,7 +114,7 @@ class Registry extends React.Component {
 			<div className="field">
 				<input hidden id="inputFile" type="file" onChange={this.readFile}></input>
 				<button onClick={this.add} className="btn add">Додати</button>
-				{this.state.docs.map(this.each)}
+				{this.state.docs.reverse().map(this.each)}
 			</div>
 		);
 	}
