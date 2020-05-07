@@ -23,7 +23,7 @@ export default class Block extends React.Component {
 	};
 
 	upload = () => {
-		alert("upload");
+		alert(this.state.text);
 	};
 
 	rendNorm = () => {
@@ -32,7 +32,7 @@ export default class Block extends React.Component {
 				<div className="text">{this.state.text}</div>
 				<button onClick={this.edit} className="btn light">Редагувати</button>
 				<button onClick={this.remove} className="btn red">Видалити</button>
-				<button onClick={this.upload} className="btn green">Видалити</button>
+				<button onClick={this.upload} className="btn green">Завантажити</button>
 			</div>
 		);
 	};
