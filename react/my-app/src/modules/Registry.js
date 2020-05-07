@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Block from './Block';
 
 export default class Registry extends React.Component {
@@ -11,7 +10,6 @@ export default class Registry extends React.Component {
 				'Постанова',
 				'Наказ'
 			],
-			deletion: true
 		};
 	};
 
@@ -19,24 +17,9 @@ export default class Registry extends React.Component {
 		document.getElementById('inputFile').click();
 	};
 
-	deleteBlock = (i) => {
-		if(this.state.deletion){
-			let arr = this.state.docs;
-			arr.splice(i, 1);
-			this.setState({ docs: arr });
-		}
-	};
-
-	updateText = (text, i) => {
-		let arr = this.state.docs;
-		arr[i] = text;
-		this.setState({ docs: arr });
-	};
-
 	each = (item, i) => {
 		return (
-			<Block key={i} index={i} update={this.updateText} deleteBlock={this.deleteBlock}>
-				{item}
+			<Block key={i} index={i} text={item}>
 			</Block>
 		);
 	};
@@ -46,7 +29,6 @@ export default class Registry extends React.Component {
 		let reader = new FileReader()
 		let arr = this.state.docs;
 		let that = this
-
 
 		reader.readAsText(selectedFile);
 

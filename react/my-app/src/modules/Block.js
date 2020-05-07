@@ -1,11 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 export default class Block extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			edit: false,
+			text: this.props.text,
+			show: true
 		};
 	};
 
@@ -14,18 +15,17 @@ export default class Block extends React.Component {
 	};
 
 	save = () => {
-		this.props.update(this.refs.txt.value, this.props.index);
-		this.setState({ edit: false })
+		this.setState({ edit: false, text: this.refs.txt.value })
 	};
 
 	remove = () => {
-		this.props.deleteBlock(this.props.index);
+		this.setState({ show: false })
 	};
 
 	rendNorm = () => {
 		return (
 			<div className="box">
-				<div className="text">{this.props.children}</div>
+				<div className="text">{this.state.text}</div>
 				<button onClick={this.edit} className="btn light">Редагувати</button>
 				<button onClick={this.remove} className="btn red">Видалити</button>
 			</div>
@@ -35,17 +35,22 @@ export default class Block extends React.Component {
 	rendEdit = () => {
 		return (
 			<div className="box">
-				<textarea autoFocus ref='txt' defaultValue={this.props.children}></textarea>
+				<textarea autoFocus ref='txt' defaultValue={this.state.text}></textarea>
 				<button onClick={this.save} className="btn success">Зберегти зміни</button>
 			</div>
 		);
 	};
 
 	render() {
-		if (this.state.edit) {
-			return this.rendEdit();
+		if (this.state.show) {
+			if (this.state.edit) {
+				return this.rendEdit();
+			} else {
+				return this.rendNorm();
+			}
 		} else {
-			return this.rendNorm();
+			return null
 		}
+
 	}
 }
