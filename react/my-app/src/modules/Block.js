@@ -22,12 +22,17 @@ export default class Block extends React.Component {
 		this.setState({ show: false })
 	};
 
+	upload = () => {
+		alert("upload");
+	};
+
 	rendNorm = () => {
 		return (
 			<div className="box">
 				<div className="text">{this.state.text}</div>
 				<button onClick={this.edit} className="btn light">Редагувати</button>
 				<button onClick={this.remove} className="btn red">Видалити</button>
+				<button onClick={this.upload} className="btn green">Видалити</button>
 			</div>
 		);
 	};
