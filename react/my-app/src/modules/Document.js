@@ -9,9 +9,11 @@ export default class Document extends React.Component {
   Results = () => (
     <Card style={{ width: '18rem' }}>
       <Card.Body>
-        <Card.Title>Автор: {this.props.author}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">Назва: {this.props.title}</Card.Subtitle>
-        <Card.Text>Зміст: {this.props.content}</Card.Text>
+        <Card.Title>Навчальний рік: {this.props.author}</Card.Title>
+        <Card.Subtitle className="mb-2 text-muted">Спеціальність: {this.props.title}</Card.Subtitle>
+        <Card.Text>Освітня програма: {this.props.content}</Card.Text>
+        <Card.Text>Освітній ступень: {this.props.content1}</Card.Text>
+        <Card.Text>Випускова кафедра: {this.props.content2}</Card.Text>
         <Card.Link href="#">Завантажити: {this.props.title}</Card.Link>
       </Card.Body>
     </Card>
@@ -29,4 +31,3 @@ export default class Document extends React.Component {
     return results
   }
 }
-
