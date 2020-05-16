@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import Registry from './modules/Registry.js';
+import App from './modules/App.js';
 
-ReactDOM.render(<Registry />, document.getElementById('root')
+ReactDOM.render(<App />, document.getElementById('root')
 );
