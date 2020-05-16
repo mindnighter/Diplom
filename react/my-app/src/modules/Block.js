@@ -22,12 +22,27 @@ export default class Block extends React.Component {
 		this.setState({ show: false })
 	};
 
+	upload = () => {
+		var filename = 'Uploaded-file';
+		var element = document.createElement('a');
+	  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.state.text));
+	  element.setAttribute('download', filename);
+
+	  element.style.display = 'none';
+	  document.body.appendChild(element);
+
+	  element.click();
+
+	  document.body.removeChild(element);
+	};
+
 	rendNorm = () => {
 		return (
 			<div className="box">
 				<div className="text">{this.state.text}</div>
 				<button onClick={this.edit} className="btn light">Редагувати</button>
 				<button onClick={this.remove} className="btn red">Видалити</button>
+				<button onClick={this.upload} className="btn green">Завантажити</button>
 			</div>
 		);
 	};
