@@ -5,7 +5,7 @@
 /загрузить
 /.pnp
 .pnp.js
-
+/files
 # testing
 /coverage
 
