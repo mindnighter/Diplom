@@ -6,6 +6,7 @@ export default class Documents extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      groupByCount: 4,
       resourses: [
         {
           author: "Студент 1 курсу, гр. ТЯ-81 Дзерун М.С.",
@@ -27,11 +28,56 @@ export default class Documents extends React.Component {
           title: "ПРО ВИКОРИСТАННЯ НЕЛІНІЙНОСТІ ХАРАКТЕРИСТИКИ МАЯТНИКОВОЇ КОЛИВАЛЬНОЇ СИСТЕМИ ДЛЯ ЗНАХОДЖЕННЯ ПОЧАТКОВИХ УМОВ ЇЇ РУХУ",
           content: "З метою скорочення часу знаходження початкових умов руху коливальних систем"
         }
+        ,
+        {
+          author: "Студент 1 курсу, гр. ТЯ-81 Дзерун М.С.",
+          title: "ПРО ВИКОРИСТАННЯ НЕЛІНІЙНОСТІ ХАРАКТЕРИСТИКИ МАЯТНИКОВОЇ КОЛИВАЛЬНОЇ СИСТЕМИ ДЛЯ ЗНАХОДЖЕННЯ ПОЧАТКОВИХ УМОВ ЇЇ РУХУ",
+          content: "З метою скорочення часу знаходження початкових умов руху коливальних систем"
+        }
+        ,
+        {
+          author: "Студент 1 курсу, гр. ТЯ-81 Дзерун М.С.",
+          title: "ПРО ВИКОРИСТАННЯ НЕЛІНІЙНОСТІ ХАРАКТЕРИСТИКИ МАЯТНИКОВОЇ КОЛИВАЛЬНОЇ СИСТЕМИ ДЛЯ ЗНАХОДЖЕННЯ ПОЧАТКОВИХ УМОВ ЇЇ РУХУ",
+          content: "З метою скорочення часу знаходження початкових умов руху коливальних систем"
+        }
+        ,
+        {
+          author: "Студент 1 курсу, гр. ТЯ-81 Дзерун М.С.",
+          title: "ПРО ВИКОРИСТАННЯ НЕЛІНІЙНОСТІ ХАРАКТЕРИСТИКИ МАЯТНИКОВОЇ КОЛИВАЛЬНОЇ СИСТЕМИ ДЛЯ ЗНАХОДЖЕННЯ ПОЧАТКОВИХ УМОВ ЇЇ РУХУ",
+          content: "З метою скорочення часу знаходження початкових умов руху коливальних систем"
+        }
+        ,
+        {
+          author: "Студент 1 курсу, гр. ТЯ-81 Дзерун М.С.",
+          title: "ПРО ВИКОРИСТАННЯ НЕЛІНІЙНОСТІ ХАРАКТЕРИСТИКИ МАЯТНИКОВОЇ КОЛИВАЛЬНОЇ СИСТЕМИ ДЛЯ ЗНАХОДЖЕННЯ ПОЧАТКОВИХ УМОВ ЇЇ РУХУ",
+          content: "З метою скорочення часу знаходження початкових умов руху коливальних систем"
+        },
+        {
+          author: "Студент 1 курсу, гр. ТЯ-81 Дзерун М.С.",
+          title: "ПРО ВИКОРИСТАННЯ НЕЛІНІЙНОСТІ ХАРАКТЕРИСТИКИ МАЯТНИКОВОЇ КОЛИВАЛЬНОЇ СИСТЕМИ ДЛЯ ЗНАХОДЖЕННЯ ПОЧАТКОВИХ УМОВ ЇЇ РУХУ",
+          content: "З метою скорочення часу знаходження початкових умов руху коливальних систем"
+        }
       ]
     }
   };
+  gropBy = (resourse, count) => {
+    const result = []
+    for (let i = 0; i < resourse.length; i += count) {
+      const elementsInRow = []
 
-  eachResourse = resourse => {
+      for (let j = i; j < resourse.length && j < i + count; j += 1) {
+        elementsInRow.push(resourse[j])
+      }
+      result.push(
+        <Row>
+          {elementsInRow}
+        </Row>
+      )
+    }
+    return result
+  }
+
+  eachResourse = (resourse, index) => {
     return (
       <Col>
         <Document show={1}
@@ -39,15 +85,13 @@ export default class Documents extends React.Component {
           title={resourse.title}
           content={resourse.content}>
         </Document >
-      </Col>
+      </Col >
     );
   };
 
   Results = () => (
     <Container fluid>
-      <Row>
-        {this.state.resourses.map(this.eachResourse)}
-      </Row >
+      {this.gropBy(this.state.resourses.map(this.eachResourse), this.state.groupByCount)}
     </Container >
   )
 
