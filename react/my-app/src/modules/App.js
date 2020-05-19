@@ -14,8 +14,18 @@ export default class App extends React.Component {
     this.state = {
       showSearch: false,
       showDocuments: false,
-      showSearchOptions: true
+      showSearchOptions: false
     };
+  };
+
+  SearchOptions = () => {
+    this.setState({ showSearchOptions: true });
+  };
+
+  Documents = () => {
+    this.setState({ showSearchOptions: false });
+    this.setState({ showDocuments: true });
+    this.setState({ showSearch: true });
   };
 
   render() {
@@ -43,7 +53,7 @@ export default class App extends React.Component {
         </Navbar>
         <Container fluid>
           <Row>
-            <Col sm={1}>
+            <Col sm={1} onClick={this.SearchOptions}>
               <Nav className="flex-column">
                 <Nav.Link >
                   <Link to="/theses">Theses</Link>
@@ -56,7 +66,7 @@ export default class App extends React.Component {
                 </Nav.Link>
               </Nav>
             </Col>
-            <Col className="mt-3" sm={11}>
+            <Col className="mt-3" sm={11} onClick={this.Documents}>
               <Search show={this.state.showSearch}></Search>
               <SearchOptions show={this.state.showSearchOptions}></SearchOptions>
               <Switch>
