@@ -12,7 +12,7 @@ export default class Search extends React.Component {
         <InputGroup className="mb-3 mt-3">
           <FormControl placeholder="Enter information for searching" />
           <InputGroup.Append>
-            <Button>Search</Button>
+            <Button onClick ={this.props.Documents}>Search</Button>
           </InputGroup.Append>
         </InputGroup>
       </Form>
