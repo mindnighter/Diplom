@@ -4,6 +4,7 @@ import { Nav, Navbar, Button, NavDropdown, Form, FormControl, Image, Container, 
 import Search from "./Search"
 import Documents from "./Documents"
 import SearchOptions from "./SearchOptions"
+import Add from "./Add"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TefLogo from "../images/TefLogo.png";
 
@@ -14,9 +15,27 @@ export default class App extends React.Component {
     this.state = {
       showSearch: false,
       showDocuments: false,
-      showSearchOptions: true
+      showSearchOptions: false,
+      showAddOptions: false
     };
   };
+
+  SearchOptions = () => {
+    this.setState({ showSearchOptions: true });
+  };
+
+  Search = () => {
+    this.setState({ showSearchOptions: false });
+    this.setState({ showSearch: true });
+  };
+
+  Documents = () => {
+    this.setState({ showDocuments: true });
+  }
+
+  Add = () => {
+    this.setState({ showAddOptions: true });
+  }
 
   render() {
     return (
@@ -37,6 +56,8 @@ export default class App extends React.Component {
                 <NavDropdown.Item>Action</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item>Separated link</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={this.Add} >Add</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
@@ -56,9 +77,10 @@ export default class App extends React.Component {
                 </Nav.Link>
               </Nav>
             </Col>
-            <Col className="mt-3" sm={11}>
-              <Search show={this.state.showSearch}></Search>
-              <SearchOptions show={this.state.showSearchOptions}></SearchOptions>
+            <Col className="mt-3" sm={11} >
+              <Search Documents={this.Documents} show={this.state.showSearch}></Search>
+              <SearchOptions Search={this.Search} show={this.state.showSearchOptions}></SearchOptions>
+              <Add show={this.state.showAddOptions}></Add>
               <Switch>
                 <Route path="/theses">
                   <Documents show={this.state.showDocuments}></Documents>
@@ -75,5 +97,21 @@ export default class App extends React.Component {
         </Container>
       </Router>
     );
+  }
+
+  async componentDidMount() {
+    // Load async data.
+    let userData = await api.get('/', {
+      params: {
+        results: 1,
+        inc: 'name,email,picture'
+      }
+    });
+    // Парсим резульатты.
+    userData = userData.data.results[0];
+    // Обновляем стейт и ререндерим наш компонент.
+    const name = `${userData.name.first} ${userData.name.last}`;
+
+    console.log(name);
   }
 }
