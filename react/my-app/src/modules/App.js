@@ -6,7 +6,7 @@ import Documents from "./Documents"
 import SearchOptions from "./SearchOptions"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TefLogo from "../images/TefLogo.png";
-
+import api from "../utils/api"
 
 export default class App extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ export default class App extends React.Component {
     this.setState({ showSearch: true });
   };
 
-  Documents = () =>{
+  Documents = () => {
     this.setState({ showDocuments: true });
   }
 
@@ -70,7 +70,7 @@ export default class App extends React.Component {
               </Nav>
             </Col>
             <Col className="mt-3" sm={11} >
-              <Search Documents ={this.Documents} show={this.state.showSearch}></Search>
+              <Search Documents={this.Documents} show={this.state.showSearch}></Search>
               <SearchOptions Search={this.Search} show={this.state.showSearchOptions}></SearchOptions>
               <Switch>
                 <Route path="/theses">
@@ -88,5 +88,21 @@ export default class App extends React.Component {
         </Container>
       </Router>
     );
+  }
+
+  async componentDidMount() {
+    // Load async data.
+    let userData = await api.get('/', {
+      params: {
+        results: 1,
+        inc: 'name,email,picture'
+      }
+    });
+    // Парсим резульатты.
+    userData = userData.data.results[0];
+    // Обновляем стейт и ререндерим наш компонент.
+    const name = `${userData.name.first} ${userData.name.last}`;
+
+    alert(name)
   }
 }
