@@ -47,7 +47,7 @@ export default class SearchOptions extends React.Component {
   eachResourse = (resourse, index) => {
     return (
       <Col>
-        <SearchOption show={1}
+        <SearchOption Search={this.props.Search} show={1}
           img={resourse.img}
           title={resourse.title}>
         </SearchOption>

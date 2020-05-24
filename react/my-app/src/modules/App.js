@@ -14,9 +14,22 @@ export default class App extends React.Component {
     this.state = {
       showSearch: false,
       showDocuments: false,
-      showSearchOptions: true
+      showSearchOptions: false
     };
   };
+
+  SearchOptions = () => {
+    this.setState({ showSearchOptions: true });
+  };
+
+  Search = () => {
+    this.setState({ showSearchOptions: false });
+    this.setState({ showSearch: true });
+  };
+
+  Documents = () =>{
+    this.setState({ showDocuments: true });
+  }
 
   render() {
     return (
@@ -43,22 +56,22 @@ export default class App extends React.Component {
         </Navbar>
         <Container fluid>
           <Row>
-            <Col sm={1}>
+            <Col sm={1} >
               <Nav className="flex-column">
                 <Nav.Link >
-                  <Link to="/theses">Theses</Link>
+                  <Link onClick={this.SearchOptions} to="/theses">Theses</Link>
                 </Nav.Link>
                 <Nav.Link >
-                  <Link to="/bachelor-works">Bachelor Works</Link>
+                  <Link onClick={this.SearchOptions} to="/bachelor-works">Bachelor Works</Link>
                 </Nav.Link>
                 <Nav.Link >
-                  <Link to="/master-works">Master Works</Link>
+                  <Link onClick={this.SearchOptions} to="/master-works">Master Works</Link>
                 </Nav.Link>
               </Nav>
             </Col>
-            <Col className="mt-3" sm={11}>
-              <Search show={this.state.showSearch}></Search>
-              <SearchOptions show={this.state.showSearchOptions}></SearchOptions>
+            <Col className="mt-3" sm={11} >
+              <Search Documents ={this.Documents} show={this.state.showSearch}></Search>
+              <SearchOptions Search={this.Search} show={this.state.showSearchOptions}></SearchOptions>
               <Switch>
                 <Route path="/theses">
                   <Documents show={this.state.showDocuments}></Documents>

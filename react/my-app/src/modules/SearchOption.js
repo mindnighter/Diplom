@@ -19,7 +19,7 @@ export default class SearchOption extends React.Component {
   }
 
   Results = () => (
-    <Card style={{ width: '18rem' }}>
+    <Card onClick = {this.props.Search} style={{ width: '18rem' }}>
       <Card.Img
         variant="top" style={{ width: '286px' }} src={this.props.img} className='bg-light'
         onMouseOver={this.toggleChangeBackgroundImg} onMouseLeave={this.toggleChangeBackgroundImg} />
