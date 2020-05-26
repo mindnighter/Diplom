@@ -31,7 +31,7 @@ export default class SearchOption extends React.Component {
 
   render() {
     let results
-    console.log(this.props.img)
+
     if (this.props.show) {
       results = this.Results()
     } else {

@@ -18,23 +18,27 @@ export default class Download extends React.Component {
     }
   }
 
-    DownloadDocument = () =>{
-        document.getElementById('inputFile').click();
-    }
+  DownloadDocument = () => {
+    document.getElementById('inputFile').click();
+  }
 
-    readFile = () => {
-        var selectedFile = document.getElementById('inputFile').files[0];
-        var reader = new FileReader
-                   reader.onload = function (e) {
-          var FileContent = e.target.result;
-                      alert(FileContent);
-                      return FileContent;
-        };
-      }
+  readFile = () => {
+    const selectedFile = document.getElementById('inputFile').files[0];
+
+    const reader = new FileReader
+    reader.readAsDataURL(selectedFile);
+    reader.onload = function (e) {
+      console.log(reader.result)
+    };
+
+    reader.onerror = function (e) {
+      console.log(e)
+    };
+  }
 
   Results = () => (
-    <Card onClick = {this.DownloadDocument} style={{ width: '18rem' }}>
-        <input hidden id="inputFile" type="file"  onChange={this.readFile}></input>
+    <Card onClick={this.DownloadDocument} style={{ width: '18rem' }}>
+      <input hidden id="inputFile" type="file" onChange={this.readFile}></input>
       <Card.Img
         variant="top" style={{ width: '286px' }} src={this.props.img} className='bg-light'
         onMouseOver={this.toggleChangeBackgroundImg} onMouseLeave={this.toggleChangeBackgroundImg} />
@@ -46,7 +50,7 @@ export default class Download extends React.Component {
 
   render() {
     let results
-    console.log(this.props.img)
+
     if (this.props.show) {
       results = this.Results()
     } else {

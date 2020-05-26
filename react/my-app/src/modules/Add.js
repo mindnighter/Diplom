@@ -44,7 +44,7 @@ export default class Add extends React.Component {
 
   eachResourse = (resourse, index) => {
     return (
-        <Col>
+      <Col>
         <Download show={1}
           img={resourse.img}
           title={resourse.title}>

@@ -99,19 +99,19 @@ export default class App extends React.Component {
     );
   }
 
-  async componentDidMount() {
-    // Load async data.
-    let userData = await api.get('/', {
-      params: {
-        results: 1,
-        inc: 'name,email,picture'
-      }
-    });
-    // Парсим резульатты.
-    userData = userData.data.results[0];
-    // Обновляем стейт и ререндерим наш компонент.
-    const name = `${userData.name.first} ${userData.name.last}`;
+  // async componentDidMount() {
+  //   // Load async data.
+  //   let userData = await api.get('/', {
+  //     params: {
+  //       results: 1,
+  //       inc: 'name,email,picture'
+  //     }
+  //   });
+  //   // Парсим резульатты.
+  //   userData = userData.data.results[0];
+  //   // Обновляем стейт и ререндерим наш компонент.
+  //   const name = `${userData.name.first} ${userData.name.last}`;
 
-    console.log(name);
-  }
+  //   console.log(name);
+  // }
 }
