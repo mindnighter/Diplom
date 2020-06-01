@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card } from "react-bootstrap"
-import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
 
 export default class Download extends React.Component {
   constructor(props) {
@@ -29,12 +28,7 @@ export default class Download extends React.Component {
     const reader = new FileReader
     reader.readAsArrayBuffer(selectedFile);
     reader.onload = async function (e) {
-      const pdfDoc = await PDFDocument.load(reader.result)
-      const firstPage = pdfDoc.getPage(0)
-      console.log(firstPage)
-      console.log(firstPage.getContentStream().computeContents())
-      console.log(Utf8ArrayToStr(firstPage.getContentStream().computeContents()))
-      console.log(firstPage.getSize())
+      console.log(freader.result)
     };
 
     reader.onerror = function (e) {
