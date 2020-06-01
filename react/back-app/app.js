@@ -3,11 +3,15 @@ var app = express();
 const fs = require('fs');
 const pdf = require('pdf-parse');
 
-
+//thethis
 app.get('/', function (req, res) {
   let dataBuffer = fs.readFileSync('./1.pdf');
+
+  const regUDC = new RegExp(/\nУДК /gu)
+
   pdf(dataBuffer).then(function (data) {
-    const works = data.text.split("УДК ")
+    const works = data.text.split(regUDC)
+
     const UDCs = []
     const author = []
     const subAuthor = []
@@ -30,15 +34,13 @@ app.get('/', function (req, res) {
       subAuthor.push(workSplittedEnter[2].trim())
 
       const enterTitlePart = []
-      // regAllUpperLetterInWord.test(workSplittedEnter[j])
       for (let j = 3; !regSmallLetter.test(workSplittedEnter[j]) && j < workSplittedEnter.length; j++) {
         enterTitlePart.push(workSplittedEnter[j])
       }
       title.push(enterTitlePart.join('').trim())
-
     }
 
-    res.send(title);
+    res.send(author);
   });
 
 });
