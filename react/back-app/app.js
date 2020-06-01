@@ -4,8 +4,9 @@ const fs = require('fs');
 const pdf = require('pdf-parse');
 
 //thethis
+/*
 app.get('/', function (req, res) {
-  let dataBuffer = fs.readFileSync('./1.pdf');
+  let dataBuffer = fs.readFileSync('./thethis.pdf');
 
   const regUDC = new RegExp(/\nУДК /gu)
 
@@ -40,10 +41,65 @@ app.get('/', function (req, res) {
       title.push(enterTitlePart.join('').trim())
     }
 
-    res.send(author);
+    res.send(UDCs);
   });
 
 });
+*/
+//bakalavr
+app.get('/', function (req, res) {
+  let dataBuffer = fs.readFileSync('./bakalavr_2.pdf');
+  pdf(dataBuffer).then(function (data) {
+    //content
+    const start = "ВСТУП";
+    const end = "СПИСОК ВИКОРИСТАНИХ ДЖЕРЕЛ \n";
+    const idxStart = data.text.indexOf(start);
+    const idxEnd = data.text.indexOf(end);
+    const content = data.text.slice(idxStart+5,idxEnd);
+    //name
+    const strNameEnd = "(прізвище, ім’я, по батькові)";
+    const idxNameEnd = data.text.indexOf(strNameEnd);
+    let iter = 5;
+    let i = idxNameEnd;
+    while(iter>0){
+
+      i--;
+     if(data.text[i] == data.text[i].toUpperCase() && data.text[i] != "_" && data.text[i] != " "){
+        iter--;
+      }
+    }
+    const idxNameStart = i;
+    var re = /_/gi;
+    const name = data.text.slice(idxNameStart,idxNameEnd).replace(re,"");
+    //direction
+    const strDirect = "підготовки";
+    const idxDirectStart = data.text.indexOf(strDirect);
+    let arr = "";
+      for(i = idxDirectStart; i<idxDirectStart+50; i++){
+        if(Number.isInteger(parseInt(data.text[i],10)) || data.text[i]=="."){
+          //console.log(data.text[i]);
+          arr+=(data.text[i]);
+        }
+      }
+    const direction =  arr;
+    //supervisor
+    const strStartSup = "Керівник";
+    const strEndSup = "_";
+    const idxStartSup =  data.text.indexOf(strStartSup);
+    const featurestr = data.text.slice(idxStartSup);
+    const idxEndSup = featurestr.indexOf(strEndSup);
+    const idxStartSup2 =  featurestr.indexOf(strStartSup);
+    const supervisor = featurestr.slice(idxStartSup2,idxEndSup)
+
+    res.send(supervisor);
+   //console.log();
+    //res.send(name);
+    //res.send(content);
+    //res.send(direction);
+  });
+});
+
+
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
