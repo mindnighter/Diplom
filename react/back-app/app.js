@@ -47,59 +47,121 @@ app.get('/', function (req, res) {
 });
 */
 //bakalavr
-app.get('/', function (req, res) {
+/* app.get('/', function (req, res) {
   let dataBuffer = fs.readFileSync('./bakalavr_2.pdf');
   pdf(dataBuffer).then(function (data) {
     //content
-    const start = "ВСТУП";
+    const start = "ВСТУП \n";
     const end = "СПИСОК ВИКОРИСТАНИХ ДЖЕРЕЛ \n";
     const idxStart = data.text.indexOf(start);
     const idxEnd = data.text.indexOf(end);
     const content = data.text.slice(idxStart+5,idxEnd);
-    //name
+    //author  
+    const regName = new RegExp(/[А-ЯЮЩЇІЄҐЬ][а-яющїієґь\-]{0,}\s[А-ЯЮЩЇІЄҐЬ][а-яющїієґь\-]{1,}(\s[А-ЯЮЩЇІЄҐЬ][а-яющїієґь\-]{1,})/);
     const strNameEnd = "(прізвище, ім’я, по батькові)";
     const idxNameEnd = data.text.indexOf(strNameEnd);
-    let iter = 5;
-    let i = idxNameEnd;
-    while(iter>0){
-
-      i--;
-     if(data.text[i] == data.text[i].toUpperCase() && data.text[i] != "_" && data.text[i] != " "){
-        iter--;
-      }
-    }
-    const idxNameStart = i;
-    var re = /_/gi;
-    const name = data.text.slice(idxNameStart,idxNameEnd).replace(re,"");
+    var str = data.text.slice(idxNameEnd-150, idxNameEnd);
+    const author = regName.exec(str);
     //direction
     const strDirect = "підготовки";
     const idxDirectStart = data.text.indexOf(strDirect);
     let arr = "";
       for(i = idxDirectStart; i<idxDirectStart+50; i++){
         if(Number.isInteger(parseInt(data.text[i],10)) || data.text[i]=="."){
-          //console.log(data.text[i]);
           arr+=(data.text[i]);
         }
       }
     const direction =  arr;
-    //supervisor
+    //subAutor
+    const regSup = new RegExp(/[\p{Lu}\.\p{Ll},\s]{1,}/gu);
     const strStartSup = "Керівник";
-    const strEndSup = "_";
+    const endSup = "(";
     const idxStartSup =  data.text.indexOf(strStartSup);
-    const featurestr = data.text.slice(idxStartSup);
-    const idxEndSup = featurestr.indexOf(strEndSup);
-    const idxStartSup2 =  featurestr.indexOf(strStartSup);
-    const supervisor = featurestr.slice(idxStartSup2,idxEndSup)
+    var strSup = data.text.slice(idxStartSup);
+    const idxEndSup = strSup.indexOf(endSup );
+    var strSup2 = strSup.slice(9,idxEndSup);
+    const subAutor =strSup2.match(regSup).join('').trim();  //regSup.exec(strSup2).join('').trim();
 
-    res.send(supervisor);
-   //console.log();
-    //res.send(name);
+    //title
+    const regTit = new RegExp(/[\p{Lu} \. \- \p{Ll},\s]{1,}/gu);
+    const startTit = "тему";
+    const endTit = "Виконав";
+    const idxStartTit =  data.text.indexOf(startTit);
+    var strTit = data.text.slice(idxStartTit);
+    const idxEndTit = strTit.indexOf(endTit );
+    var strTit2 = strTit.slice(5,idxEndTit);
+    const title =strTit2.match(regTit).join('').trim();
+    //res.send(title);
+    res.send(subAutor);
+    //res.send(author[0]);
     //res.send(content);
     //res.send(direction);
   });
 });
+ */
+//magisters
+app.get('/', function (req, res) {
+  let dataBuffer = fs.readFileSync('./magistr_2.pdf');
+  pdf(dataBuffer).then(function (data) {
+    //content
+    const start = "ВСТУП \n";
+    const end = "СПИСОК ВИКОРИСТАНИХ ДЖЕРЕЛ \n";
+    const idxStart = data.text.indexOf(start);
+    const idxEnd = data.text.indexOf(end);
+    const content = data.text.slice(idxStart+5,idxEnd);
 
+    //author  
+    const regName = new RegExp(/[А-ЯЮЩЇІЄҐЬ][а-яющїієґь\-]{0,}\s[А-ЯЮЩЇІЄҐЬ][а-яющїієґь\-]{1,}(\s[А-ЯЮЩЇІЄҐЬ][а-яющїієґь\-]{1,})/);
+    const strNameEnd = "(прізвище, ім’я, по батькові)";
+    const idxNameEnd = data.text.indexOf(strNameEnd);
+    const str = data.text.slice(idxNameEnd-150, idxNameEnd);
+    const author  = regName.exec(str);
 
+    // subAutor
+    const regSup = new RegExp(/[\p{Lu}\.\p{Ll},\s]{1,}/gu);
+    const strStartSup = "керівник";
+    const endSup = "(";
+    const idxStartSup =  data.text.indexOf(strStartSup);
+    var strSup = data.text.slice(idxStartSup);
+    const idxEndSup = strSup.indexOf(endSup );
+    var strSup2 = strSup.slice(9,idxEndSup);
+    const subAutor =strSup2.match(regSup).join('').trim();  //regSup.exec(strSup2).join('').trim();
+    
+
+    //profession
+    const startProf = "зі спеціальності -";
+    const endProf = "\n";
+    const idxStartProf = data.text.indexOf(startProf);
+    const strProf =  data.text.slice(idxStartProf);
+    const idxEndProf = strProf.indexOf(endProf);
+    const profession = strProf.slice(18,idxEndProf);
+    
+
+    //specialization
+    const startSpec = "за спеціалізацією -";
+    const endSpec = "\n";
+    const idxStartSpec = data.text.indexOf(startSpec);
+    const strSpec =  data.text.slice(idxStartSpec);
+    const idxEndSpec = strSpec.indexOf(endSpec);
+    const specialization = strSpec.slice(19,idxEndSpec);
+
+    //title
+    const regTit = new RegExp(/[\p{Lu} \. \- \p{Ll},\s]{1,}/gu);
+    const startTit = "тему";
+    const endTit = "Виконав";
+    const idxStartTit =  data.text.indexOf(startTit);
+    var strTit = data.text.slice(idxStartTit);
+    const idxEndTit = strTit.indexOf(endTit );
+    var strTit2 = strTit.slice(5,idxEndTit);
+    const title =strTit2.match(regTit).join('').trim();
+    res.send(title);
+    //res.send(subAutor);
+    //res.send(profession);
+    //res.send(specialization);
+    //res.send(author[0]);
+    //res.send(content);
+  });
+});
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
