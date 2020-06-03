@@ -10,9 +10,14 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.14.1",
+    "apollo-server-express": "^2.14.1",
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
-    "graphql": "^15.0.0",
+    "graphql-tools": "^6.0.5",
+    "graphql-yoga": "^1.18.3",
+    "jsonwebtoken": "^8.5.1",
     "pdf-parse": "^1.1.1",
-    "pdfjs-dist": "^2.3.200"
+    "pdfjs-dist": "^2.3.200",
+    "prisma-client-lib": "^1.34.10"
   }
 }
