@@ -1,14 +1,46 @@
-type Link {
+type Resource {
   id: ID! @id
-  description: String!
-  url: String!
-  postedBy: User
+  author: [Author] @relation(name: "AuthorResource")
+  subAuthor: [Author] @relation(name: "SubAuthorResource")
+  title: Title
+  direction: Direction
+  profession: Profession
+  specialization: Specialization
+  udc: Udc
+  content: Content
 }
 
-type User {
+type Author {
   id: ID! @id
-  name: String!
-  email: String! @unique
-  password: String!
-  links: [Link!]!
+  fullName: String!
+}
+
+type Title {
+  id: ID! @id
+  title: String!
+}
+
+type Direction {
+  id: ID! @id
+  code: String!
+}
+
+type Profession {
+  id: ID! @id
+  profession: String!
+}
+
+type Specialization {
+  id: ID! @id
+  specialization: String!
+}
+
+type Udc {
+  id: ID! @id
+  udc: String!
+}
+
+type Content {
+  id: ID! @id
+  content: String!
 }

@@ -2,33 +2,75 @@ const { gql } = require('apollo-server');
 
 const typeDefs = gql`
 type Query {
-  info: String!
-  feed: [Link!]!
+  resources: [Resource!]
+  authors: [Author!]
+  titles: [Title!]
+  directions: [Direction!]
+  professions: [Profession!]
+  specializations: [Specialization!]
+  udcs: [Udc!]
+  contents: [Content!]
 }
 
 type Mutation {
-  post(url: String!, description: String!): Link!
-  signup(email: String!, password: String!, name: String!): AuthPayload
-  login(email: String!, password: String!): AuthPayload
+  postResource(
+    author: String, subAuthor: String, title: String, direction: String,
+    profession: String, specialization: String, udc: String, content: String
+  ): Resource,
+  singleUpload(file: Upload!): File!,
 }
 
-type Link {
+type File {
+  filename: String!
+  mimetype: String!
+  encoding: String!
+}
+
+type Resource {
   id: ID!
-  description: String!
-  url: String!
-  postedBy: User
+  author: [Author]
+  subAuthor: [Author]
+  title: Title
+  direction: Direction
+  profession: Profession
+  specialization: Specialization
+  udc: Udc
+  content: Content
 }
 
-type AuthPayload {
-  token: String
-  user: User
-}
-
-type User {
+type Author {
   id: ID!
-  name: String!
-  email: String!
-  links: [Link!]!
+  fullName: String!
+}
+
+type Title {
+  id: ID!
+  title: String!
+}
+
+type Direction {
+  id: ID!
+  code: String!
+}
+
+type Profession {
+  id: ID!
+  profession: String!
+}
+
+type Specialization {
+  id: ID!
+  specialization: String!
+}
+
+type Udc {
+  id: ID!
+  udc: String!
+}
+
+type Content {
+  id: ID!
+  content: String!
 }
 `;
 

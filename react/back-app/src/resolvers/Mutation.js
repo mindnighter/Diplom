@@ -1,56 +1,65 @@
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const { APP_SECRET, getUserId } = require('../utils')
+const fs = require("fs")
+const { fullResource } = require("../fragments/Resource")
 
-async function signup(parent, args, context, info) {
-  // 1
-  const hashedPassword = await bcrypt.hash(args.password, 10)
-  // 2
-  const { password, ...user } = await context.prisma.createUser({ ...args, password: hashedPassword })
+function postResource(parent, args, context, info) {
+  const { author, subAuthor, title, direction, profession, specialization, udc, content } = args
 
-  // 3
-  const token = jwt.sign({ userId: user.id }, APP_SECRET)
-
-  // 4
-  return {
-    token,
-    user,
-  }
+  return context.prisma.createResource({
+    author: {
+      create: {
+        fullName: author
+      }
+    },
+    subAuthor: {
+      create: {
+        fullName: subAuthor
+      }
+    },
+    title: {
+      create: {
+        title
+      }
+    },
+    direction: {
+      create: {
+        code: direction
+      }
+    },
+    profession: {
+      create: {
+        profession
+      }
+    },
+    specialization: {
+      create: {
+        specialization
+      }
+    },
+    udc: {
+      create: {
+        udc
+      }
+    },
+    content: {
+      create: {
+        content
+      }
+    }
+  }).$fragment(fullResource)
 }
 
-async function login(parent, args, context, info) {
-  // 1
-  const { password, ...user } = await context.prisma.user({ email: args.email })
-  if (!user) {
-    throw new Error('No such user found')
-  }
+function singleUpload(parent, args, context, info) {
+  return args.file.then(file => {
+    const { createReadStream, filename, mimetype } = file
 
-  // 2
-  const valid = await bcrypt.compare(args.password, password)
-  if (!valid) {
-    throw new Error('Invalid password')
-  }
+    const fileStream = createReadStream()
 
-  const token = jwt.sign({ userId: user.id }, APP_SECRET)
+    fileStream.pipe(fs.createWriteStream(`./uploadedFiles/${filename}`))
 
-  // 3
-  return {
-    token,
-    user,
-  }
+    return file;
+  });
 }
-
-function post(parent, args, context, info) {
-  const userId = getUserId(context)
-  return context.prisma.createLink({
-    url: args.url,
-    description: args.description,
-    postedBy: { connect: { id: userId } },
-  })
-}
-
 module.exports = {
-  signup,
-  login,
-  post,
+  postResource,
+  singleUpload
 }

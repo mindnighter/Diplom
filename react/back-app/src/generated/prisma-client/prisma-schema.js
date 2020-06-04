@@ -3,185 +3,297 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateLink {
+/* GraphQL */ `type AggregateAuthor {
   count: Int!
 }
 
-type AggregateUser {
+type AggregateContent {
   count: Int!
+}
+
+type AggregateDirection {
+  count: Int!
+}
+
+type AggregateProfession {
+  count: Int!
+}
+
+type AggregateResource {
+  count: Int!
+}
+
+type AggregateSpecialization {
+  count: Int!
+}
+
+type AggregateTitle {
+  count: Int!
+}
+
+type AggregateUdc {
+  count: Int!
+}
+
+type Author {
+  id: ID!
+  fullName: String!
+}
+
+type AuthorConnection {
+  pageInfo: PageInfo!
+  edges: [AuthorEdge]!
+  aggregate: AggregateAuthor!
+}
+
+input AuthorCreateInput {
+  id: ID
+  fullName: String!
+}
+
+input AuthorCreateManyInput {
+  create: [AuthorCreateInput!]
+  connect: [AuthorWhereUniqueInput!]
+}
+
+type AuthorEdge {
+  node: Author!
+  cursor: String!
+}
+
+enum AuthorOrderByInput {
+  id_ASC
+  id_DESC
+  fullName_ASC
+  fullName_DESC
+}
+
+type AuthorPreviousValues {
+  id: ID!
+  fullName: String!
+}
+
+input AuthorScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  fullName: String
+  fullName_not: String
+  fullName_in: [String!]
+  fullName_not_in: [String!]
+  fullName_lt: String
+  fullName_lte: String
+  fullName_gt: String
+  fullName_gte: String
+  fullName_contains: String
+  fullName_not_contains: String
+  fullName_starts_with: String
+  fullName_not_starts_with: String
+  fullName_ends_with: String
+  fullName_not_ends_with: String
+  AND: [AuthorScalarWhereInput!]
+  OR: [AuthorScalarWhereInput!]
+  NOT: [AuthorScalarWhereInput!]
+}
+
+type AuthorSubscriptionPayload {
+  mutation: MutationType!
+  node: Author
+  updatedFields: [String!]
+  previousValues: AuthorPreviousValues
+}
+
+input AuthorSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: AuthorWhereInput
+  AND: [AuthorSubscriptionWhereInput!]
+  OR: [AuthorSubscriptionWhereInput!]
+  NOT: [AuthorSubscriptionWhereInput!]
+}
+
+input AuthorUpdateDataInput {
+  fullName: String
+}
+
+input AuthorUpdateInput {
+  fullName: String
+}
+
+input AuthorUpdateManyDataInput {
+  fullName: String
+}
+
+input AuthorUpdateManyInput {
+  create: [AuthorCreateInput!]
+  update: [AuthorUpdateWithWhereUniqueNestedInput!]
+  upsert: [AuthorUpsertWithWhereUniqueNestedInput!]
+  delete: [AuthorWhereUniqueInput!]
+  connect: [AuthorWhereUniqueInput!]
+  set: [AuthorWhereUniqueInput!]
+  disconnect: [AuthorWhereUniqueInput!]
+  deleteMany: [AuthorScalarWhereInput!]
+  updateMany: [AuthorUpdateManyWithWhereNestedInput!]
+}
+
+input AuthorUpdateManyMutationInput {
+  fullName: String
+}
+
+input AuthorUpdateManyWithWhereNestedInput {
+  where: AuthorScalarWhereInput!
+  data: AuthorUpdateManyDataInput!
+}
+
+input AuthorUpdateWithWhereUniqueNestedInput {
+  where: AuthorWhereUniqueInput!
+  data: AuthorUpdateDataInput!
+}
+
+input AuthorUpsertWithWhereUniqueNestedInput {
+  where: AuthorWhereUniqueInput!
+  update: AuthorUpdateDataInput!
+  create: AuthorCreateInput!
+}
+
+input AuthorWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  fullName: String
+  fullName_not: String
+  fullName_in: [String!]
+  fullName_not_in: [String!]
+  fullName_lt: String
+  fullName_lte: String
+  fullName_gt: String
+  fullName_gte: String
+  fullName_contains: String
+  fullName_not_contains: String
+  fullName_starts_with: String
+  fullName_not_starts_with: String
+  fullName_ends_with: String
+  fullName_not_ends_with: String
+  AND: [AuthorWhereInput!]
+  OR: [AuthorWhereInput!]
+  NOT: [AuthorWhereInput!]
+}
+
+input AuthorWhereUniqueInput {
+  id: ID
 }
 
 type BatchPayload {
   count: Long!
 }
 
-type Link {
+type Content {
   id: ID!
-  description: String!
-  url: String!
-  postedBy: User
+  content: String!
 }
 
-type LinkConnection {
+type ContentConnection {
   pageInfo: PageInfo!
-  edges: [LinkEdge]!
-  aggregate: AggregateLink!
+  edges: [ContentEdge]!
+  aggregate: AggregateContent!
 }
 
-input LinkCreateInput {
+input ContentCreateInput {
   id: ID
-  description: String!
-  url: String!
-  postedBy: UserCreateOneWithoutLinksInput
+  content: String!
 }
 
-input LinkCreateManyWithoutPostedByInput {
-  create: [LinkCreateWithoutPostedByInput!]
-  connect: [LinkWhereUniqueInput!]
+input ContentCreateOneInput {
+  create: ContentCreateInput
+  connect: ContentWhereUniqueInput
 }
 
-input LinkCreateWithoutPostedByInput {
-  id: ID
-  description: String!
-  url: String!
-}
-
-type LinkEdge {
-  node: Link!
+type ContentEdge {
+  node: Content!
   cursor: String!
 }
 
-enum LinkOrderByInput {
+enum ContentOrderByInput {
   id_ASC
   id_DESC
-  description_ASC
-  description_DESC
-  url_ASC
-  url_DESC
+  content_ASC
+  content_DESC
 }
 
-type LinkPreviousValues {
+type ContentPreviousValues {
   id: ID!
-  description: String!
-  url: String!
+  content: String!
 }
 
-input LinkScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  description: String
-  description_not: String
-  description_in: [String!]
-  description_not_in: [String!]
-  description_lt: String
-  description_lte: String
-  description_gt: String
-  description_gte: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
-  url: String
-  url_not: String
-  url_in: [String!]
-  url_not_in: [String!]
-  url_lt: String
-  url_lte: String
-  url_gt: String
-  url_gte: String
-  url_contains: String
-  url_not_contains: String
-  url_starts_with: String
-  url_not_starts_with: String
-  url_ends_with: String
-  url_not_ends_with: String
-  AND: [LinkScalarWhereInput!]
-  OR: [LinkScalarWhereInput!]
-  NOT: [LinkScalarWhereInput!]
-}
-
-type LinkSubscriptionPayload {
+type ContentSubscriptionPayload {
   mutation: MutationType!
-  node: Link
+  node: Content
   updatedFields: [String!]
-  previousValues: LinkPreviousValues
+  previousValues: ContentPreviousValues
 }
 
-input LinkSubscriptionWhereInput {
+input ContentSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: LinkWhereInput
-  AND: [LinkSubscriptionWhereInput!]
-  OR: [LinkSubscriptionWhereInput!]
-  NOT: [LinkSubscriptionWhereInput!]
+  node: ContentWhereInput
+  AND: [ContentSubscriptionWhereInput!]
+  OR: [ContentSubscriptionWhereInput!]
+  NOT: [ContentSubscriptionWhereInput!]
 }
 
-input LinkUpdateInput {
-  description: String
-  url: String
-  postedBy: UserUpdateOneWithoutLinksInput
+input ContentUpdateDataInput {
+  content: String
 }
 
-input LinkUpdateManyDataInput {
-  description: String
-  url: String
+input ContentUpdateInput {
+  content: String
 }
 
-input LinkUpdateManyMutationInput {
-  description: String
-  url: String
+input ContentUpdateManyMutationInput {
+  content: String
 }
 
-input LinkUpdateManyWithoutPostedByInput {
-  create: [LinkCreateWithoutPostedByInput!]
-  delete: [LinkWhereUniqueInput!]
-  connect: [LinkWhereUniqueInput!]
-  set: [LinkWhereUniqueInput!]
-  disconnect: [LinkWhereUniqueInput!]
-  update: [LinkUpdateWithWhereUniqueWithoutPostedByInput!]
-  upsert: [LinkUpsertWithWhereUniqueWithoutPostedByInput!]
-  deleteMany: [LinkScalarWhereInput!]
-  updateMany: [LinkUpdateManyWithWhereNestedInput!]
+input ContentUpdateOneInput {
+  create: ContentCreateInput
+  update: ContentUpdateDataInput
+  upsert: ContentUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: ContentWhereUniqueInput
 }
 
-input LinkUpdateManyWithWhereNestedInput {
-  where: LinkScalarWhereInput!
-  data: LinkUpdateManyDataInput!
+input ContentUpsertNestedInput {
+  update: ContentUpdateDataInput!
+  create: ContentCreateInput!
 }
 
-input LinkUpdateWithoutPostedByDataInput {
-  description: String
-  url: String
-}
-
-input LinkUpdateWithWhereUniqueWithoutPostedByInput {
-  where: LinkWhereUniqueInput!
-  data: LinkUpdateWithoutPostedByDataInput!
-}
-
-input LinkUpsertWithWhereUniqueWithoutPostedByInput {
-  where: LinkWhereUniqueInput!
-  update: LinkUpdateWithoutPostedByDataInput!
-  create: LinkCreateWithoutPostedByInput!
-}
-
-input LinkWhereInput {
+input ContentWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -196,59 +308,199 @@ input LinkWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  description: String
-  description_not: String
-  description_in: [String!]
-  description_not_in: [String!]
-  description_lt: String
-  description_lte: String
-  description_gt: String
-  description_gte: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
-  url: String
-  url_not: String
-  url_in: [String!]
-  url_not_in: [String!]
-  url_lt: String
-  url_lte: String
-  url_gt: String
-  url_gte: String
-  url_contains: String
-  url_not_contains: String
-  url_starts_with: String
-  url_not_starts_with: String
-  url_ends_with: String
-  url_not_ends_with: String
-  postedBy: UserWhereInput
-  AND: [LinkWhereInput!]
-  OR: [LinkWhereInput!]
-  NOT: [LinkWhereInput!]
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  AND: [ContentWhereInput!]
+  OR: [ContentWhereInput!]
+  NOT: [ContentWhereInput!]
 }
 
-input LinkWhereUniqueInput {
+input ContentWhereUniqueInput {
+  id: ID
+}
+
+type Direction {
+  id: ID!
+  code: String!
+}
+
+type DirectionConnection {
+  pageInfo: PageInfo!
+  edges: [DirectionEdge]!
+  aggregate: AggregateDirection!
+}
+
+input DirectionCreateInput {
+  id: ID
+  code: String!
+}
+
+input DirectionCreateOneInput {
+  create: DirectionCreateInput
+  connect: DirectionWhereUniqueInput
+}
+
+type DirectionEdge {
+  node: Direction!
+  cursor: String!
+}
+
+enum DirectionOrderByInput {
+  id_ASC
+  id_DESC
+  code_ASC
+  code_DESC
+}
+
+type DirectionPreviousValues {
+  id: ID!
+  code: String!
+}
+
+type DirectionSubscriptionPayload {
+  mutation: MutationType!
+  node: Direction
+  updatedFields: [String!]
+  previousValues: DirectionPreviousValues
+}
+
+input DirectionSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: DirectionWhereInput
+  AND: [DirectionSubscriptionWhereInput!]
+  OR: [DirectionSubscriptionWhereInput!]
+  NOT: [DirectionSubscriptionWhereInput!]
+}
+
+input DirectionUpdateDataInput {
+  code: String
+}
+
+input DirectionUpdateInput {
+  code: String
+}
+
+input DirectionUpdateManyMutationInput {
+  code: String
+}
+
+input DirectionUpdateOneInput {
+  create: DirectionCreateInput
+  update: DirectionUpdateDataInput
+  upsert: DirectionUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: DirectionWhereUniqueInput
+}
+
+input DirectionUpsertNestedInput {
+  update: DirectionUpdateDataInput!
+  create: DirectionCreateInput!
+}
+
+input DirectionWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  code: String
+  code_not: String
+  code_in: [String!]
+  code_not_in: [String!]
+  code_lt: String
+  code_lte: String
+  code_gt: String
+  code_gte: String
+  code_contains: String
+  code_not_contains: String
+  code_starts_with: String
+  code_not_starts_with: String
+  code_ends_with: String
+  code_not_ends_with: String
+  AND: [DirectionWhereInput!]
+  OR: [DirectionWhereInput!]
+  NOT: [DirectionWhereInput!]
+}
+
+input DirectionWhereUniqueInput {
   id: ID
 }
 
 scalar Long
 
 type Mutation {
-  createLink(data: LinkCreateInput!): Link!
-  updateLink(data: LinkUpdateInput!, where: LinkWhereUniqueInput!): Link
-  updateManyLinks(data: LinkUpdateManyMutationInput!, where: LinkWhereInput): BatchPayload!
-  upsertLink(where: LinkWhereUniqueInput!, create: LinkCreateInput!, update: LinkUpdateInput!): Link!
-  deleteLink(where: LinkWhereUniqueInput!): Link
-  deleteManyLinks(where: LinkWhereInput): BatchPayload!
-  createUser(data: UserCreateInput!): User!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  deleteUser(where: UserWhereUniqueInput!): User
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  createAuthor(data: AuthorCreateInput!): Author!
+  updateAuthor(data: AuthorUpdateInput!, where: AuthorWhereUniqueInput!): Author
+  updateManyAuthors(data: AuthorUpdateManyMutationInput!, where: AuthorWhereInput): BatchPayload!
+  upsertAuthor(where: AuthorWhereUniqueInput!, create: AuthorCreateInput!, update: AuthorUpdateInput!): Author!
+  deleteAuthor(where: AuthorWhereUniqueInput!): Author
+  deleteManyAuthors(where: AuthorWhereInput): BatchPayload!
+  createContent(data: ContentCreateInput!): Content!
+  updateContent(data: ContentUpdateInput!, where: ContentWhereUniqueInput!): Content
+  updateManyContents(data: ContentUpdateManyMutationInput!, where: ContentWhereInput): BatchPayload!
+  upsertContent(where: ContentWhereUniqueInput!, create: ContentCreateInput!, update: ContentUpdateInput!): Content!
+  deleteContent(where: ContentWhereUniqueInput!): Content
+  deleteManyContents(where: ContentWhereInput): BatchPayload!
+  createDirection(data: DirectionCreateInput!): Direction!
+  updateDirection(data: DirectionUpdateInput!, where: DirectionWhereUniqueInput!): Direction
+  updateManyDirections(data: DirectionUpdateManyMutationInput!, where: DirectionWhereInput): BatchPayload!
+  upsertDirection(where: DirectionWhereUniqueInput!, create: DirectionCreateInput!, update: DirectionUpdateInput!): Direction!
+  deleteDirection(where: DirectionWhereUniqueInput!): Direction
+  deleteManyDirections(where: DirectionWhereInput): BatchPayload!
+  createProfession(data: ProfessionCreateInput!): Profession!
+  updateProfession(data: ProfessionUpdateInput!, where: ProfessionWhereUniqueInput!): Profession
+  updateManyProfessions(data: ProfessionUpdateManyMutationInput!, where: ProfessionWhereInput): BatchPayload!
+  upsertProfession(where: ProfessionWhereUniqueInput!, create: ProfessionCreateInput!, update: ProfessionUpdateInput!): Profession!
+  deleteProfession(where: ProfessionWhereUniqueInput!): Profession
+  deleteManyProfessions(where: ProfessionWhereInput): BatchPayload!
+  createResource(data: ResourceCreateInput!): Resource!
+  updateResource(data: ResourceUpdateInput!, where: ResourceWhereUniqueInput!): Resource
+  upsertResource(where: ResourceWhereUniqueInput!, create: ResourceCreateInput!, update: ResourceUpdateInput!): Resource!
+  deleteResource(where: ResourceWhereUniqueInput!): Resource
+  deleteManyResources(where: ResourceWhereInput): BatchPayload!
+  createSpecialization(data: SpecializationCreateInput!): Specialization!
+  updateSpecialization(data: SpecializationUpdateInput!, where: SpecializationWhereUniqueInput!): Specialization
+  updateManySpecializations(data: SpecializationUpdateManyMutationInput!, where: SpecializationWhereInput): BatchPayload!
+  upsertSpecialization(where: SpecializationWhereUniqueInput!, create: SpecializationCreateInput!, update: SpecializationUpdateInput!): Specialization!
+  deleteSpecialization(where: SpecializationWhereUniqueInput!): Specialization
+  deleteManySpecializations(where: SpecializationWhereInput): BatchPayload!
+  createTitle(data: TitleCreateInput!): Title!
+  updateTitle(data: TitleUpdateInput!, where: TitleWhereUniqueInput!): Title
+  updateManyTitles(data: TitleUpdateManyMutationInput!, where: TitleWhereInput): BatchPayload!
+  upsertTitle(where: TitleWhereUniqueInput!, create: TitleCreateInput!, update: TitleUpdateInput!): Title!
+  deleteTitle(where: TitleWhereUniqueInput!): Title
+  deleteManyTitles(where: TitleWhereInput): BatchPayload!
+  createUdc(data: UdcCreateInput!): Udc!
+  updateUdc(data: UdcUpdateInput!, where: UdcWhereUniqueInput!): Udc
+  updateManyUdcs(data: UdcUpdateManyMutationInput!, where: UdcWhereInput): BatchPayload!
+  upsertUdc(where: UdcWhereUniqueInput!, create: UdcCreateInput!, update: UdcUpdateInput!): Udc!
+  deleteUdc(where: UdcWhereUniqueInput!): Udc
+  deleteManyUdcs(where: UdcWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -268,130 +520,89 @@ type PageInfo {
   endCursor: String
 }
 
-type Query {
-  link(where: LinkWhereUniqueInput!): Link
-  links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link]!
-  linksConnection(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LinkConnection!
-  user(where: UserWhereUniqueInput!): User
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  node(id: ID!): Node
-}
-
-type Subscription {
-  link(where: LinkSubscriptionWhereInput): LinkSubscriptionPayload
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-}
-
-type User {
+type Profession {
   id: ID!
-  name: String!
-  email: String!
-  password: String!
-  links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link!]
+  profession: String!
 }
 
-type UserConnection {
+type ProfessionConnection {
   pageInfo: PageInfo!
-  edges: [UserEdge]!
-  aggregate: AggregateUser!
+  edges: [ProfessionEdge]!
+  aggregate: AggregateProfession!
 }
 
-input UserCreateInput {
+input ProfessionCreateInput {
   id: ID
-  name: String!
-  email: String!
-  password: String!
-  links: LinkCreateManyWithoutPostedByInput
+  profession: String!
 }
 
-input UserCreateOneWithoutLinksInput {
-  create: UserCreateWithoutLinksInput
-  connect: UserWhereUniqueInput
+input ProfessionCreateOneInput {
+  create: ProfessionCreateInput
+  connect: ProfessionWhereUniqueInput
 }
 
-input UserCreateWithoutLinksInput {
-  id: ID
-  name: String!
-  email: String!
-  password: String!
-}
-
-type UserEdge {
-  node: User!
+type ProfessionEdge {
+  node: Profession!
   cursor: String!
 }
 
-enum UserOrderByInput {
+enum ProfessionOrderByInput {
   id_ASC
   id_DESC
-  name_ASC
-  name_DESC
-  email_ASC
-  email_DESC
-  password_ASC
-  password_DESC
+  profession_ASC
+  profession_DESC
 }
 
-type UserPreviousValues {
+type ProfessionPreviousValues {
   id: ID!
-  name: String!
-  email: String!
-  password: String!
+  profession: String!
 }
 
-type UserSubscriptionPayload {
+type ProfessionSubscriptionPayload {
   mutation: MutationType!
-  node: User
+  node: Profession
   updatedFields: [String!]
-  previousValues: UserPreviousValues
+  previousValues: ProfessionPreviousValues
 }
 
-input UserSubscriptionWhereInput {
+input ProfessionSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: UserWhereInput
-  AND: [UserSubscriptionWhereInput!]
-  OR: [UserSubscriptionWhereInput!]
-  NOT: [UserSubscriptionWhereInput!]
+  node: ProfessionWhereInput
+  AND: [ProfessionSubscriptionWhereInput!]
+  OR: [ProfessionSubscriptionWhereInput!]
+  NOT: [ProfessionSubscriptionWhereInput!]
 }
 
-input UserUpdateInput {
-  name: String
-  email: String
-  password: String
-  links: LinkUpdateManyWithoutPostedByInput
+input ProfessionUpdateDataInput {
+  profession: String
 }
 
-input UserUpdateManyMutationInput {
-  name: String
-  email: String
-  password: String
+input ProfessionUpdateInput {
+  profession: String
 }
 
-input UserUpdateOneWithoutLinksInput {
-  create: UserCreateWithoutLinksInput
-  update: UserUpdateWithoutLinksDataInput
-  upsert: UserUpsertWithoutLinksInput
+input ProfessionUpdateManyMutationInput {
+  profession: String
+}
+
+input ProfessionUpdateOneInput {
+  create: ProfessionCreateInput
+  update: ProfessionUpdateDataInput
+  upsert: ProfessionUpsertNestedInput
   delete: Boolean
   disconnect: Boolean
-  connect: UserWhereUniqueInput
+  connect: ProfessionWhereUniqueInput
 }
 
-input UserUpdateWithoutLinksDataInput {
-  name: String
-  email: String
-  password: String
+input ProfessionUpsertNestedInput {
+  update: ProfessionUpdateDataInput!
+  create: ProfessionCreateInput!
 }
 
-input UserUpsertWithoutLinksInput {
-  update: UserUpdateWithoutLinksDataInput!
-  create: UserCreateWithoutLinksInput!
-}
-
-input UserWhereInput {
+input ProfessionWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -406,59 +617,535 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  email: String
-  email_not: String
-  email_in: [String!]
-  email_not_in: [String!]
-  email_lt: String
-  email_lte: String
-  email_gt: String
-  email_gte: String
-  email_contains: String
-  email_not_contains: String
-  email_starts_with: String
-  email_not_starts_with: String
-  email_ends_with: String
-  email_not_ends_with: String
-  password: String
-  password_not: String
-  password_in: [String!]
-  password_not_in: [String!]
-  password_lt: String
-  password_lte: String
-  password_gt: String
-  password_gte: String
-  password_contains: String
-  password_not_contains: String
-  password_starts_with: String
-  password_not_starts_with: String
-  password_ends_with: String
-  password_not_ends_with: String
-  links_every: LinkWhereInput
-  links_some: LinkWhereInput
-  links_none: LinkWhereInput
-  AND: [UserWhereInput!]
-  OR: [UserWhereInput!]
-  NOT: [UserWhereInput!]
+  profession: String
+  profession_not: String
+  profession_in: [String!]
+  profession_not_in: [String!]
+  profession_lt: String
+  profession_lte: String
+  profession_gt: String
+  profession_gte: String
+  profession_contains: String
+  profession_not_contains: String
+  profession_starts_with: String
+  profession_not_starts_with: String
+  profession_ends_with: String
+  profession_not_ends_with: String
+  AND: [ProfessionWhereInput!]
+  OR: [ProfessionWhereInput!]
+  NOT: [ProfessionWhereInput!]
 }
 
-input UserWhereUniqueInput {
+input ProfessionWhereUniqueInput {
   id: ID
-  email: String
+}
+
+type Query {
+  author(where: AuthorWhereUniqueInput!): Author
+  authors(where: AuthorWhereInput, orderBy: AuthorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Author]!
+  authorsConnection(where: AuthorWhereInput, orderBy: AuthorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AuthorConnection!
+  content(where: ContentWhereUniqueInput!): Content
+  contents(where: ContentWhereInput, orderBy: ContentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Content]!
+  contentsConnection(where: ContentWhereInput, orderBy: ContentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ContentConnection!
+  direction(where: DirectionWhereUniqueInput!): Direction
+  directions(where: DirectionWhereInput, orderBy: DirectionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Direction]!
+  directionsConnection(where: DirectionWhereInput, orderBy: DirectionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DirectionConnection!
+  profession(where: ProfessionWhereUniqueInput!): Profession
+  professions(where: ProfessionWhereInput, orderBy: ProfessionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Profession]!
+  professionsConnection(where: ProfessionWhereInput, orderBy: ProfessionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProfessionConnection!
+  resource(where: ResourceWhereUniqueInput!): Resource
+  resources(where: ResourceWhereInput, orderBy: ResourceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Resource]!
+  resourcesConnection(where: ResourceWhereInput, orderBy: ResourceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ResourceConnection!
+  specialization(where: SpecializationWhereUniqueInput!): Specialization
+  specializations(where: SpecializationWhereInput, orderBy: SpecializationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Specialization]!
+  specializationsConnection(where: SpecializationWhereInput, orderBy: SpecializationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SpecializationConnection!
+  title(where: TitleWhereUniqueInput!): Title
+  titles(where: TitleWhereInput, orderBy: TitleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Title]!
+  titlesConnection(where: TitleWhereInput, orderBy: TitleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TitleConnection!
+  udc(where: UdcWhereUniqueInput!): Udc
+  udcs(where: UdcWhereInput, orderBy: UdcOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Udc]!
+  udcsConnection(where: UdcWhereInput, orderBy: UdcOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UdcConnection!
+  node(id: ID!): Node
+}
+
+type Resource {
+  id: ID!
+  author(where: AuthorWhereInput, orderBy: AuthorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Author!]
+  subAuthor(where: AuthorWhereInput, orderBy: AuthorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Author!]
+  title: Title
+  direction: Direction
+  profession: Profession
+  specialization: Specialization
+  udc: Udc
+  content: Content
+}
+
+type ResourceConnection {
+  pageInfo: PageInfo!
+  edges: [ResourceEdge]!
+  aggregate: AggregateResource!
+}
+
+input ResourceCreateInput {
+  id: ID
+  author: AuthorCreateManyInput
+  subAuthor: AuthorCreateManyInput
+  title: TitleCreateOneInput
+  direction: DirectionCreateOneInput
+  profession: ProfessionCreateOneInput
+  specialization: SpecializationCreateOneInput
+  udc: UdcCreateOneInput
+  content: ContentCreateOneInput
+}
+
+type ResourceEdge {
+  node: Resource!
+  cursor: String!
+}
+
+enum ResourceOrderByInput {
+  id_ASC
+  id_DESC
+}
+
+type ResourcePreviousValues {
+  id: ID!
+}
+
+type ResourceSubscriptionPayload {
+  mutation: MutationType!
+  node: Resource
+  updatedFields: [String!]
+  previousValues: ResourcePreviousValues
+}
+
+input ResourceSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ResourceWhereInput
+  AND: [ResourceSubscriptionWhereInput!]
+  OR: [ResourceSubscriptionWhereInput!]
+  NOT: [ResourceSubscriptionWhereInput!]
+}
+
+input ResourceUpdateInput {
+  author: AuthorUpdateManyInput
+  subAuthor: AuthorUpdateManyInput
+  title: TitleUpdateOneInput
+  direction: DirectionUpdateOneInput
+  profession: ProfessionUpdateOneInput
+  specialization: SpecializationUpdateOneInput
+  udc: UdcUpdateOneInput
+  content: ContentUpdateOneInput
+}
+
+input ResourceWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  author_every: AuthorWhereInput
+  author_some: AuthorWhereInput
+  author_none: AuthorWhereInput
+  subAuthor_every: AuthorWhereInput
+  subAuthor_some: AuthorWhereInput
+  subAuthor_none: AuthorWhereInput
+  title: TitleWhereInput
+  direction: DirectionWhereInput
+  profession: ProfessionWhereInput
+  specialization: SpecializationWhereInput
+  udc: UdcWhereInput
+  content: ContentWhereInput
+  AND: [ResourceWhereInput!]
+  OR: [ResourceWhereInput!]
+  NOT: [ResourceWhereInput!]
+}
+
+input ResourceWhereUniqueInput {
+  id: ID
+}
+
+type Specialization {
+  id: ID!
+  specialization: String!
+}
+
+type SpecializationConnection {
+  pageInfo: PageInfo!
+  edges: [SpecializationEdge]!
+  aggregate: AggregateSpecialization!
+}
+
+input SpecializationCreateInput {
+  id: ID
+  specialization: String!
+}
+
+input SpecializationCreateOneInput {
+  create: SpecializationCreateInput
+  connect: SpecializationWhereUniqueInput
+}
+
+type SpecializationEdge {
+  node: Specialization!
+  cursor: String!
+}
+
+enum SpecializationOrderByInput {
+  id_ASC
+  id_DESC
+  specialization_ASC
+  specialization_DESC
+}
+
+type SpecializationPreviousValues {
+  id: ID!
+  specialization: String!
+}
+
+type SpecializationSubscriptionPayload {
+  mutation: MutationType!
+  node: Specialization
+  updatedFields: [String!]
+  previousValues: SpecializationPreviousValues
+}
+
+input SpecializationSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: SpecializationWhereInput
+  AND: [SpecializationSubscriptionWhereInput!]
+  OR: [SpecializationSubscriptionWhereInput!]
+  NOT: [SpecializationSubscriptionWhereInput!]
+}
+
+input SpecializationUpdateDataInput {
+  specialization: String
+}
+
+input SpecializationUpdateInput {
+  specialization: String
+}
+
+input SpecializationUpdateManyMutationInput {
+  specialization: String
+}
+
+input SpecializationUpdateOneInput {
+  create: SpecializationCreateInput
+  update: SpecializationUpdateDataInput
+  upsert: SpecializationUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: SpecializationWhereUniqueInput
+}
+
+input SpecializationUpsertNestedInput {
+  update: SpecializationUpdateDataInput!
+  create: SpecializationCreateInput!
+}
+
+input SpecializationWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  specialization: String
+  specialization_not: String
+  specialization_in: [String!]
+  specialization_not_in: [String!]
+  specialization_lt: String
+  specialization_lte: String
+  specialization_gt: String
+  specialization_gte: String
+  specialization_contains: String
+  specialization_not_contains: String
+  specialization_starts_with: String
+  specialization_not_starts_with: String
+  specialization_ends_with: String
+  specialization_not_ends_with: String
+  AND: [SpecializationWhereInput!]
+  OR: [SpecializationWhereInput!]
+  NOT: [SpecializationWhereInput!]
+}
+
+input SpecializationWhereUniqueInput {
+  id: ID
+}
+
+type Subscription {
+  author(where: AuthorSubscriptionWhereInput): AuthorSubscriptionPayload
+  content(where: ContentSubscriptionWhereInput): ContentSubscriptionPayload
+  direction(where: DirectionSubscriptionWhereInput): DirectionSubscriptionPayload
+  profession(where: ProfessionSubscriptionWhereInput): ProfessionSubscriptionPayload
+  resource(where: ResourceSubscriptionWhereInput): ResourceSubscriptionPayload
+  specialization(where: SpecializationSubscriptionWhereInput): SpecializationSubscriptionPayload
+  title(where: TitleSubscriptionWhereInput): TitleSubscriptionPayload
+  udc(where: UdcSubscriptionWhereInput): UdcSubscriptionPayload
+}
+
+type Title {
+  id: ID!
+  title: String!
+}
+
+type TitleConnection {
+  pageInfo: PageInfo!
+  edges: [TitleEdge]!
+  aggregate: AggregateTitle!
+}
+
+input TitleCreateInput {
+  id: ID
+  title: String!
+}
+
+input TitleCreateOneInput {
+  create: TitleCreateInput
+  connect: TitleWhereUniqueInput
+}
+
+type TitleEdge {
+  node: Title!
+  cursor: String!
+}
+
+enum TitleOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+}
+
+type TitlePreviousValues {
+  id: ID!
+  title: String!
+}
+
+type TitleSubscriptionPayload {
+  mutation: MutationType!
+  node: Title
+  updatedFields: [String!]
+  previousValues: TitlePreviousValues
+}
+
+input TitleSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: TitleWhereInput
+  AND: [TitleSubscriptionWhereInput!]
+  OR: [TitleSubscriptionWhereInput!]
+  NOT: [TitleSubscriptionWhereInput!]
+}
+
+input TitleUpdateDataInput {
+  title: String
+}
+
+input TitleUpdateInput {
+  title: String
+}
+
+input TitleUpdateManyMutationInput {
+  title: String
+}
+
+input TitleUpdateOneInput {
+  create: TitleCreateInput
+  update: TitleUpdateDataInput
+  upsert: TitleUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: TitleWhereUniqueInput
+}
+
+input TitleUpsertNestedInput {
+  update: TitleUpdateDataInput!
+  create: TitleCreateInput!
+}
+
+input TitleWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  AND: [TitleWhereInput!]
+  OR: [TitleWhereInput!]
+  NOT: [TitleWhereInput!]
+}
+
+input TitleWhereUniqueInput {
+  id: ID
+}
+
+type Udc {
+  id: ID!
+  udc: String!
+}
+
+type UdcConnection {
+  pageInfo: PageInfo!
+  edges: [UdcEdge]!
+  aggregate: AggregateUdc!
+}
+
+input UdcCreateInput {
+  id: ID
+  udc: String!
+}
+
+input UdcCreateOneInput {
+  create: UdcCreateInput
+  connect: UdcWhereUniqueInput
+}
+
+type UdcEdge {
+  node: Udc!
+  cursor: String!
+}
+
+enum UdcOrderByInput {
+  id_ASC
+  id_DESC
+  udc_ASC
+  udc_DESC
+}
+
+type UdcPreviousValues {
+  id: ID!
+  udc: String!
+}
+
+type UdcSubscriptionPayload {
+  mutation: MutationType!
+  node: Udc
+  updatedFields: [String!]
+  previousValues: UdcPreviousValues
+}
+
+input UdcSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UdcWhereInput
+  AND: [UdcSubscriptionWhereInput!]
+  OR: [UdcSubscriptionWhereInput!]
+  NOT: [UdcSubscriptionWhereInput!]
+}
+
+input UdcUpdateDataInput {
+  udc: String
+}
+
+input UdcUpdateInput {
+  udc: String
+}
+
+input UdcUpdateManyMutationInput {
+  udc: String
+}
+
+input UdcUpdateOneInput {
+  create: UdcCreateInput
+  update: UdcUpdateDataInput
+  upsert: UdcUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UdcWhereUniqueInput
+}
+
+input UdcUpsertNestedInput {
+  update: UdcUpdateDataInput!
+  create: UdcCreateInput!
+}
+
+input UdcWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  udc: String
+  udc_not: String
+  udc_in: [String!]
+  udc_not_in: [String!]
+  udc_lt: String
+  udc_lte: String
+  udc_gt: String
+  udc_gte: String
+  udc_contains: String
+  udc_not_contains: String
+  udc_starts_with: String
+  udc_not_starts_with: String
+  udc_ends_with: String
+  udc_not_ends_with: String
+  AND: [UdcWhereInput!]
+  OR: [UdcWhereInput!]
+  NOT: [UdcWhereInput!]
+}
+
+input UdcWhereUniqueInput {
+  id: ID
 }
 `
       }

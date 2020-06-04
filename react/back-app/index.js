@@ -4,14 +4,10 @@ const { prisma } = require('./src/generated/prisma-client')
 const typeDefs = require('./src/schema');
 const Query = require('./src/resolvers/Query')
 const Mutation = require('./src/resolvers/Mutation')
-const User = require('./src/resolvers/User')
-const Link = require('./src/resolvers/Link')
 
 const resolvers = {
   Query,
   Mutation,
-  User,
-  Link
 }
 
 const server = new ApolloServer({

@@ -16,8 +16,14 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
-  link: (where?: LinkWhereInput) => Promise<boolean>;
-  user: (where?: UserWhereInput) => Promise<boolean>;
+  author: (where?: AuthorWhereInput) => Promise<boolean>;
+  content: (where?: ContentWhereInput) => Promise<boolean>;
+  direction: (where?: DirectionWhereInput) => Promise<boolean>;
+  profession: (where?: ProfessionWhereInput) => Promise<boolean>;
+  resource: (where?: ResourceWhereInput) => Promise<boolean>;
+  specialization: (where?: SpecializationWhereInput) => Promise<boolean>;
+  title: (where?: TitleWhereInput) => Promise<boolean>;
+  udc: (where?: UdcWhereInput) => Promise<boolean>;
 }
 
 export interface Node {}
@@ -39,82 +45,296 @@ export interface Prisma {
    * Queries
    */
 
-  link: (where: LinkWhereUniqueInput) => LinkNullablePromise;
-  links: (args?: {
-    where?: LinkWhereInput;
-    orderBy?: LinkOrderByInput;
+  author: (where: AuthorWhereUniqueInput) => AuthorNullablePromise;
+  authors: (args?: {
+    where?: AuthorWhereInput;
+    orderBy?: AuthorOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<Link>;
-  linksConnection: (args?: {
-    where?: LinkWhereInput;
-    orderBy?: LinkOrderByInput;
+  }) => FragmentableArray<Author>;
+  authorsConnection: (args?: {
+    where?: AuthorWhereInput;
+    orderBy?: AuthorOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => LinkConnectionPromise;
-  user: (where: UserWhereUniqueInput) => UserNullablePromise;
-  users: (args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
+  }) => AuthorConnectionPromise;
+  content: (where: ContentWhereUniqueInput) => ContentNullablePromise;
+  contents: (args?: {
+    where?: ContentWhereInput;
+    orderBy?: ContentOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<User>;
-  usersConnection: (args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
+  }) => FragmentableArray<Content>;
+  contentsConnection: (args?: {
+    where?: ContentWhereInput;
+    orderBy?: ContentOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => UserConnectionPromise;
+  }) => ContentConnectionPromise;
+  direction: (where: DirectionWhereUniqueInput) => DirectionNullablePromise;
+  directions: (args?: {
+    where?: DirectionWhereInput;
+    orderBy?: DirectionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Direction>;
+  directionsConnection: (args?: {
+    where?: DirectionWhereInput;
+    orderBy?: DirectionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => DirectionConnectionPromise;
+  profession: (where: ProfessionWhereUniqueInput) => ProfessionNullablePromise;
+  professions: (args?: {
+    where?: ProfessionWhereInput;
+    orderBy?: ProfessionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Profession>;
+  professionsConnection: (args?: {
+    where?: ProfessionWhereInput;
+    orderBy?: ProfessionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ProfessionConnectionPromise;
+  resource: (where: ResourceWhereUniqueInput) => ResourceNullablePromise;
+  resources: (args?: {
+    where?: ResourceWhereInput;
+    orderBy?: ResourceOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Resource>;
+  resourcesConnection: (args?: {
+    where?: ResourceWhereInput;
+    orderBy?: ResourceOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ResourceConnectionPromise;
+  specialization: (
+    where: SpecializationWhereUniqueInput
+  ) => SpecializationNullablePromise;
+  specializations: (args?: {
+    where?: SpecializationWhereInput;
+    orderBy?: SpecializationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Specialization>;
+  specializationsConnection: (args?: {
+    where?: SpecializationWhereInput;
+    orderBy?: SpecializationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => SpecializationConnectionPromise;
+  title: (where: TitleWhereUniqueInput) => TitleNullablePromise;
+  titles: (args?: {
+    where?: TitleWhereInput;
+    orderBy?: TitleOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Title>;
+  titlesConnection: (args?: {
+    where?: TitleWhereInput;
+    orderBy?: TitleOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => TitleConnectionPromise;
+  udc: (where: UdcWhereUniqueInput) => UdcNullablePromise;
+  udcs: (args?: {
+    where?: UdcWhereInput;
+    orderBy?: UdcOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Udc>;
+  udcsConnection: (args?: {
+    where?: UdcWhereInput;
+    orderBy?: UdcOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => UdcConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
   /**
    * Mutations
    */
 
-  createLink: (data: LinkCreateInput) => LinkPromise;
-  updateLink: (args: {
-    data: LinkUpdateInput;
-    where: LinkWhereUniqueInput;
-  }) => LinkPromise;
-  updateManyLinks: (args: {
-    data: LinkUpdateManyMutationInput;
-    where?: LinkWhereInput;
+  createAuthor: (data: AuthorCreateInput) => AuthorPromise;
+  updateAuthor: (args: {
+    data: AuthorUpdateInput;
+    where: AuthorWhereUniqueInput;
+  }) => AuthorPromise;
+  updateManyAuthors: (args: {
+    data: AuthorUpdateManyMutationInput;
+    where?: AuthorWhereInput;
   }) => BatchPayloadPromise;
-  upsertLink: (args: {
-    where: LinkWhereUniqueInput;
-    create: LinkCreateInput;
-    update: LinkUpdateInput;
-  }) => LinkPromise;
-  deleteLink: (where: LinkWhereUniqueInput) => LinkPromise;
-  deleteManyLinks: (where?: LinkWhereInput) => BatchPayloadPromise;
-  createUser: (data: UserCreateInput) => UserPromise;
-  updateUser: (args: {
-    data: UserUpdateInput;
-    where: UserWhereUniqueInput;
-  }) => UserPromise;
-  updateManyUsers: (args: {
-    data: UserUpdateManyMutationInput;
-    where?: UserWhereInput;
+  upsertAuthor: (args: {
+    where: AuthorWhereUniqueInput;
+    create: AuthorCreateInput;
+    update: AuthorUpdateInput;
+  }) => AuthorPromise;
+  deleteAuthor: (where: AuthorWhereUniqueInput) => AuthorPromise;
+  deleteManyAuthors: (where?: AuthorWhereInput) => BatchPayloadPromise;
+  createContent: (data: ContentCreateInput) => ContentPromise;
+  updateContent: (args: {
+    data: ContentUpdateInput;
+    where: ContentWhereUniqueInput;
+  }) => ContentPromise;
+  updateManyContents: (args: {
+    data: ContentUpdateManyMutationInput;
+    where?: ContentWhereInput;
   }) => BatchPayloadPromise;
-  upsertUser: (args: {
-    where: UserWhereUniqueInput;
-    create: UserCreateInput;
-    update: UserUpdateInput;
-  }) => UserPromise;
-  deleteUser: (where: UserWhereUniqueInput) => UserPromise;
-  deleteManyUsers: (where?: UserWhereInput) => BatchPayloadPromise;
+  upsertContent: (args: {
+    where: ContentWhereUniqueInput;
+    create: ContentCreateInput;
+    update: ContentUpdateInput;
+  }) => ContentPromise;
+  deleteContent: (where: ContentWhereUniqueInput) => ContentPromise;
+  deleteManyContents: (where?: ContentWhereInput) => BatchPayloadPromise;
+  createDirection: (data: DirectionCreateInput) => DirectionPromise;
+  updateDirection: (args: {
+    data: DirectionUpdateInput;
+    where: DirectionWhereUniqueInput;
+  }) => DirectionPromise;
+  updateManyDirections: (args: {
+    data: DirectionUpdateManyMutationInput;
+    where?: DirectionWhereInput;
+  }) => BatchPayloadPromise;
+  upsertDirection: (args: {
+    where: DirectionWhereUniqueInput;
+    create: DirectionCreateInput;
+    update: DirectionUpdateInput;
+  }) => DirectionPromise;
+  deleteDirection: (where: DirectionWhereUniqueInput) => DirectionPromise;
+  deleteManyDirections: (where?: DirectionWhereInput) => BatchPayloadPromise;
+  createProfession: (data: ProfessionCreateInput) => ProfessionPromise;
+  updateProfession: (args: {
+    data: ProfessionUpdateInput;
+    where: ProfessionWhereUniqueInput;
+  }) => ProfessionPromise;
+  updateManyProfessions: (args: {
+    data: ProfessionUpdateManyMutationInput;
+    where?: ProfessionWhereInput;
+  }) => BatchPayloadPromise;
+  upsertProfession: (args: {
+    where: ProfessionWhereUniqueInput;
+    create: ProfessionCreateInput;
+    update: ProfessionUpdateInput;
+  }) => ProfessionPromise;
+  deleteProfession: (where: ProfessionWhereUniqueInput) => ProfessionPromise;
+  deleteManyProfessions: (where?: ProfessionWhereInput) => BatchPayloadPromise;
+  createResource: (data: ResourceCreateInput) => ResourcePromise;
+  updateResource: (args: {
+    data: ResourceUpdateInput;
+    where: ResourceWhereUniqueInput;
+  }) => ResourcePromise;
+  upsertResource: (args: {
+    where: ResourceWhereUniqueInput;
+    create: ResourceCreateInput;
+    update: ResourceUpdateInput;
+  }) => ResourcePromise;
+  deleteResource: (where: ResourceWhereUniqueInput) => ResourcePromise;
+  deleteManyResources: (where?: ResourceWhereInput) => BatchPayloadPromise;
+  createSpecialization: (
+    data: SpecializationCreateInput
+  ) => SpecializationPromise;
+  updateSpecialization: (args: {
+    data: SpecializationUpdateInput;
+    where: SpecializationWhereUniqueInput;
+  }) => SpecializationPromise;
+  updateManySpecializations: (args: {
+    data: SpecializationUpdateManyMutationInput;
+    where?: SpecializationWhereInput;
+  }) => BatchPayloadPromise;
+  upsertSpecialization: (args: {
+    where: SpecializationWhereUniqueInput;
+    create: SpecializationCreateInput;
+    update: SpecializationUpdateInput;
+  }) => SpecializationPromise;
+  deleteSpecialization: (
+    where: SpecializationWhereUniqueInput
+  ) => SpecializationPromise;
+  deleteManySpecializations: (
+    where?: SpecializationWhereInput
+  ) => BatchPayloadPromise;
+  createTitle: (data: TitleCreateInput) => TitlePromise;
+  updateTitle: (args: {
+    data: TitleUpdateInput;
+    where: TitleWhereUniqueInput;
+  }) => TitlePromise;
+  updateManyTitles: (args: {
+    data: TitleUpdateManyMutationInput;
+    where?: TitleWhereInput;
+  }) => BatchPayloadPromise;
+  upsertTitle: (args: {
+    where: TitleWhereUniqueInput;
+    create: TitleCreateInput;
+    update: TitleUpdateInput;
+  }) => TitlePromise;
+  deleteTitle: (where: TitleWhereUniqueInput) => TitlePromise;
+  deleteManyTitles: (where?: TitleWhereInput) => BatchPayloadPromise;
+  createUdc: (data: UdcCreateInput) => UdcPromise;
+  updateUdc: (args: {
+    data: UdcUpdateInput;
+    where: UdcWhereUniqueInput;
+  }) => UdcPromise;
+  updateManyUdcs: (args: {
+    data: UdcUpdateManyMutationInput;
+    where?: UdcWhereInput;
+  }) => BatchPayloadPromise;
+  upsertUdc: (args: {
+    where: UdcWhereUniqueInput;
+    create: UdcCreateInput;
+    update: UdcUpdateInput;
+  }) => UdcPromise;
+  deleteUdc: (where: UdcWhereUniqueInput) => UdcPromise;
+  deleteManyUdcs: (where?: UdcWhereInput) => BatchPayloadPromise;
 
   /**
    * Subscriptions
@@ -124,12 +344,30 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  link: (
-    where?: LinkSubscriptionWhereInput
-  ) => LinkSubscriptionPayloadSubscription;
-  user: (
-    where?: UserSubscriptionWhereInput
-  ) => UserSubscriptionPayloadSubscription;
+  author: (
+    where?: AuthorSubscriptionWhereInput
+  ) => AuthorSubscriptionPayloadSubscription;
+  content: (
+    where?: ContentSubscriptionWhereInput
+  ) => ContentSubscriptionPayloadSubscription;
+  direction: (
+    where?: DirectionSubscriptionWhereInput
+  ) => DirectionSubscriptionPayloadSubscription;
+  profession: (
+    where?: ProfessionSubscriptionWhereInput
+  ) => ProfessionSubscriptionPayloadSubscription;
+  resource: (
+    where?: ResourceSubscriptionWhereInput
+  ) => ResourceSubscriptionPayloadSubscription;
+  specialization: (
+    where?: SpecializationSubscriptionWhereInput
+  ) => SpecializationSubscriptionPayloadSubscription;
+  title: (
+    where?: TitleSubscriptionWhereInput
+  ) => TitleSubscriptionPayloadSubscription;
+  udc: (
+    where?: UdcSubscriptionWhereInput
+  ) => UdcSubscriptionPayloadSubscription;
 }
 
 export interface ClientConstructor<T> {
@@ -140,45 +378,256 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type LinkOrderByInput =
+export type ContentOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "description_ASC"
-  | "description_DESC"
-  | "url_ASC"
-  | "url_DESC";
+  | "content_ASC"
+  | "content_DESC";
 
-export type UserOrderByInput =
+export type DirectionOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "email_ASC"
-  | "email_DESC"
-  | "password_ASC"
-  | "password_DESC";
+  | "code_ASC"
+  | "code_DESC";
+
+export type ProfessionOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "profession_ASC"
+  | "profession_DESC";
+
+export type ResourceOrderByInput = "id_ASC" | "id_DESC";
+
+export type SpecializationOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "specialization_ASC"
+  | "specialization_DESC";
+
+export type AuthorOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "fullName_ASC"
+  | "fullName_DESC";
+
+export type TitleOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "title_ASC"
+  | "title_DESC";
+
+export type UdcOrderByInput = "id_ASC" | "id_DESC" | "udc_ASC" | "udc_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface UserUpdateOneWithoutLinksInput {
-  create?: Maybe<UserCreateWithoutLinksInput>;
-  update?: Maybe<UserUpdateWithoutLinksDataInput>;
-  upsert?: Maybe<UserUpsertWithoutLinksInput>;
+export interface DirectionUpdateManyMutationInput {
+  code?: Maybe<String>;
+}
+
+export type AuthorWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type TitleWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface AuthorUpdateWithWhereUniqueNestedInput {
+  where: AuthorWhereUniqueInput;
+  data: AuthorUpdateDataInput;
+}
+
+export interface AuthorWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  fullName?: Maybe<String>;
+  fullName_not?: Maybe<String>;
+  fullName_in?: Maybe<String[] | String>;
+  fullName_not_in?: Maybe<String[] | String>;
+  fullName_lt?: Maybe<String>;
+  fullName_lte?: Maybe<String>;
+  fullName_gt?: Maybe<String>;
+  fullName_gte?: Maybe<String>;
+  fullName_contains?: Maybe<String>;
+  fullName_not_contains?: Maybe<String>;
+  fullName_starts_with?: Maybe<String>;
+  fullName_not_starts_with?: Maybe<String>;
+  fullName_ends_with?: Maybe<String>;
+  fullName_not_ends_with?: Maybe<String>;
+  AND?: Maybe<AuthorWhereInput[] | AuthorWhereInput>;
+  OR?: Maybe<AuthorWhereInput[] | AuthorWhereInput>;
+  NOT?: Maybe<AuthorWhereInput[] | AuthorWhereInput>;
+}
+
+export interface AuthorCreateManyInput {
+  create?: Maybe<AuthorCreateInput[] | AuthorCreateInput>;
+  connect?: Maybe<AuthorWhereUniqueInput[] | AuthorWhereUniqueInput>;
+}
+
+export interface DirectionUpdateDataInput {
+  code?: Maybe<String>;
+}
+
+export interface ContentWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  content?: Maybe<String>;
+  content_not?: Maybe<String>;
+  content_in?: Maybe<String[] | String>;
+  content_not_in?: Maybe<String[] | String>;
+  content_lt?: Maybe<String>;
+  content_lte?: Maybe<String>;
+  content_gt?: Maybe<String>;
+  content_gte?: Maybe<String>;
+  content_contains?: Maybe<String>;
+  content_not_contains?: Maybe<String>;
+  content_starts_with?: Maybe<String>;
+  content_not_starts_with?: Maybe<String>;
+  content_ends_with?: Maybe<String>;
+  content_not_ends_with?: Maybe<String>;
+  AND?: Maybe<ContentWhereInput[] | ContentWhereInput>;
+  OR?: Maybe<ContentWhereInput[] | ContentWhereInput>;
+  NOT?: Maybe<ContentWhereInput[] | ContentWhereInput>;
+}
+
+export interface DirectionUpdateOneInput {
+  create?: Maybe<DirectionCreateInput>;
+  update?: Maybe<DirectionUpdateDataInput>;
+  upsert?: Maybe<DirectionUpsertNestedInput>;
   delete?: Maybe<Boolean>;
   disconnect?: Maybe<Boolean>;
-  connect?: Maybe<UserWhereUniqueInput>;
+  connect?: Maybe<DirectionWhereUniqueInput>;
 }
 
-export type LinkWhereUniqueInput = AtLeastOne<{
+export interface SpecializationSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<SpecializationWhereInput>;
+  AND?: Maybe<
+    | SpecializationSubscriptionWhereInput[]
+    | SpecializationSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    | SpecializationSubscriptionWhereInput[]
+    | SpecializationSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    | SpecializationSubscriptionWhereInput[]
+    | SpecializationSubscriptionWhereInput
+  >;
+}
+
+export interface TitleUpsertNestedInput {
+  update: TitleUpdateDataInput;
+  create: TitleCreateInput;
+}
+
+export interface ProfessionSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ProfessionWhereInput>;
+  AND?: Maybe<
+    ProfessionSubscriptionWhereInput[] | ProfessionSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    ProfessionSubscriptionWhereInput[] | ProfessionSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    ProfessionSubscriptionWhereInput[] | ProfessionSubscriptionWhereInput
+  >;
+}
+
+export type UdcWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface LinkUpdateManyMutationInput {
-  description?: Maybe<String>;
-  url?: Maybe<String>;
+export interface DirectionSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<DirectionWhereInput>;
+  AND?: Maybe<
+    DirectionSubscriptionWhereInput[] | DirectionSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    DirectionSubscriptionWhereInput[] | DirectionSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    DirectionSubscriptionWhereInput[] | DirectionSubscriptionWhereInput
+  >;
 }
 
-export interface LinkWhereInput {
+export interface TitleUpdateDataInput {
+  title?: Maybe<String>;
+}
+
+export interface ContentSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ContentWhereInput>;
+  AND?: Maybe<ContentSubscriptionWhereInput[] | ContentSubscriptionWhereInput>;
+  OR?: Maybe<ContentSubscriptionWhereInput[] | ContentSubscriptionWhereInput>;
+  NOT?: Maybe<ContentSubscriptionWhereInput[] | ContentSubscriptionWhereInput>;
+}
+
+export interface TitleUpdateOneInput {
+  create?: Maybe<TitleCreateInput>;
+  update?: Maybe<TitleUpdateDataInput>;
+  upsert?: Maybe<TitleUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<TitleWhereUniqueInput>;
+}
+
+export interface UdcUpdateManyMutationInput {
+  udc?: Maybe<String>;
+}
+
+export interface AuthorUpdateManyDataInput {
+  fullName?: Maybe<String>;
+}
+
+export type ProfessionWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface AuthorUpdateManyWithWhereNestedInput {
+  where: AuthorScalarWhereInput;
+  data: AuthorUpdateManyDataInput;
+}
+
+export interface ProfessionWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -193,300 +642,607 @@ export interface LinkWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  url?: Maybe<String>;
-  url_not?: Maybe<String>;
-  url_in?: Maybe<String[] | String>;
-  url_not_in?: Maybe<String[] | String>;
-  url_lt?: Maybe<String>;
-  url_lte?: Maybe<String>;
-  url_gt?: Maybe<String>;
-  url_gte?: Maybe<String>;
-  url_contains?: Maybe<String>;
-  url_not_contains?: Maybe<String>;
-  url_starts_with?: Maybe<String>;
-  url_not_starts_with?: Maybe<String>;
-  url_ends_with?: Maybe<String>;
-  url_not_ends_with?: Maybe<String>;
-  postedBy?: Maybe<UserWhereInput>;
-  AND?: Maybe<LinkWhereInput[] | LinkWhereInput>;
-  OR?: Maybe<LinkWhereInput[] | LinkWhereInput>;
-  NOT?: Maybe<LinkWhereInput[] | LinkWhereInput>;
+  profession?: Maybe<String>;
+  profession_not?: Maybe<String>;
+  profession_in?: Maybe<String[] | String>;
+  profession_not_in?: Maybe<String[] | String>;
+  profession_lt?: Maybe<String>;
+  profession_lte?: Maybe<String>;
+  profession_gt?: Maybe<String>;
+  profession_gte?: Maybe<String>;
+  profession_contains?: Maybe<String>;
+  profession_not_contains?: Maybe<String>;
+  profession_starts_with?: Maybe<String>;
+  profession_not_starts_with?: Maybe<String>;
+  profession_ends_with?: Maybe<String>;
+  profession_not_ends_with?: Maybe<String>;
+  AND?: Maybe<ProfessionWhereInput[] | ProfessionWhereInput>;
+  OR?: Maybe<ProfessionWhereInput[] | ProfessionWhereInput>;
+  NOT?: Maybe<ProfessionWhereInput[] | ProfessionWhereInput>;
 }
 
-export interface LinkCreateInput {
+export interface SpecializationUpdateManyMutationInput {
+  specialization?: Maybe<String>;
+}
+
+export interface ContentUpsertNestedInput {
+  update: ContentUpdateDataInput;
+  create: ContentCreateInput;
+}
+
+export interface AuthorCreateInput {
   id?: Maybe<ID_Input>;
-  description: String;
-  url: String;
-  postedBy?: Maybe<UserCreateOneWithoutLinksInput>;
+  fullName: String;
 }
 
-export interface LinkCreateManyWithoutPostedByInput {
-  create?: Maybe<
-    LinkCreateWithoutPostedByInput[] | LinkCreateWithoutPostedByInput
-  >;
-  connect?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
+export interface ContentUpdateDataInput {
+  content?: Maybe<String>;
 }
 
-export interface UserCreateOneWithoutLinksInput {
-  create?: Maybe<UserCreateWithoutLinksInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
+export interface AuthorUpdateInput {
+  fullName?: Maybe<String>;
 }
 
-export interface LinkSubscriptionWhereInput {
+export interface UdcUpsertNestedInput {
+  update: UdcUpdateDataInput;
+  create: UdcCreateInput;
+}
+
+export interface AuthorUpdateManyMutationInput {
+  fullName?: Maybe<String>;
+}
+
+export interface ResourceWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  author_every?: Maybe<AuthorWhereInput>;
+  author_some?: Maybe<AuthorWhereInput>;
+  author_none?: Maybe<AuthorWhereInput>;
+  subAuthor_every?: Maybe<AuthorWhereInput>;
+  subAuthor_some?: Maybe<AuthorWhereInput>;
+  subAuthor_none?: Maybe<AuthorWhereInput>;
+  title?: Maybe<TitleWhereInput>;
+  direction?: Maybe<DirectionWhereInput>;
+  profession?: Maybe<ProfessionWhereInput>;
+  specialization?: Maybe<SpecializationWhereInput>;
+  udc?: Maybe<UdcWhereInput>;
+  content?: Maybe<ContentWhereInput>;
+  AND?: Maybe<ResourceWhereInput[] | ResourceWhereInput>;
+  OR?: Maybe<ResourceWhereInput[] | ResourceWhereInput>;
+  NOT?: Maybe<ResourceWhereInput[] | ResourceWhereInput>;
+}
+
+export interface AuthorScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  fullName?: Maybe<String>;
+  fullName_not?: Maybe<String>;
+  fullName_in?: Maybe<String[] | String>;
+  fullName_not_in?: Maybe<String[] | String>;
+  fullName_lt?: Maybe<String>;
+  fullName_lte?: Maybe<String>;
+  fullName_gt?: Maybe<String>;
+  fullName_gte?: Maybe<String>;
+  fullName_contains?: Maybe<String>;
+  fullName_not_contains?: Maybe<String>;
+  fullName_starts_with?: Maybe<String>;
+  fullName_not_starts_with?: Maybe<String>;
+  fullName_ends_with?: Maybe<String>;
+  fullName_not_ends_with?: Maybe<String>;
+  AND?: Maybe<AuthorScalarWhereInput[] | AuthorScalarWhereInput>;
+  OR?: Maybe<AuthorScalarWhereInput[] | AuthorScalarWhereInput>;
+  NOT?: Maybe<AuthorScalarWhereInput[] | AuthorScalarWhereInput>;
+}
+
+export interface SpecializationWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  specialization?: Maybe<String>;
+  specialization_not?: Maybe<String>;
+  specialization_in?: Maybe<String[] | String>;
+  specialization_not_in?: Maybe<String[] | String>;
+  specialization_lt?: Maybe<String>;
+  specialization_lte?: Maybe<String>;
+  specialization_gt?: Maybe<String>;
+  specialization_gte?: Maybe<String>;
+  specialization_contains?: Maybe<String>;
+  specialization_not_contains?: Maybe<String>;
+  specialization_starts_with?: Maybe<String>;
+  specialization_not_starts_with?: Maybe<String>;
+  specialization_ends_with?: Maybe<String>;
+  specialization_not_ends_with?: Maybe<String>;
+  AND?: Maybe<SpecializationWhereInput[] | SpecializationWhereInput>;
+  OR?: Maybe<SpecializationWhereInput[] | SpecializationWhereInput>;
+  NOT?: Maybe<SpecializationWhereInput[] | SpecializationWhereInput>;
+}
+
+export interface AuthorUpsertWithWhereUniqueNestedInput {
+  where: AuthorWhereUniqueInput;
+  update: AuthorUpdateDataInput;
+  create: AuthorCreateInput;
+}
+
+export interface UdcUpdateOneInput {
+  create?: Maybe<UdcCreateInput>;
+  update?: Maybe<UdcUpdateDataInput>;
+  upsert?: Maybe<UdcUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UdcWhereUniqueInput>;
+}
+
+export interface ContentCreateInput {
+  id?: Maybe<ID_Input>;
+  content: String;
+}
+
+export interface SpecializationUpdateDataInput {
+  specialization?: Maybe<String>;
+}
+
+export interface ContentUpdateInput {
+  content?: Maybe<String>;
+}
+
+export type SpecializationWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface ContentUpdateManyMutationInput {
+  content?: Maybe<String>;
+}
+
+export interface ProfessionUpdateDataInput {
+  profession?: Maybe<String>;
+}
+
+export interface DirectionCreateInput {
+  id?: Maybe<ID_Input>;
+  code: String;
+}
+
+export interface DirectionUpsertNestedInput {
+  update: DirectionUpdateDataInput;
+  create: DirectionCreateInput;
+}
+
+export interface DirectionUpdateInput {
+  code?: Maybe<String>;
+}
+
+export interface TitleSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<LinkWhereInput>;
-  AND?: Maybe<LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput>;
-  OR?: Maybe<LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput>;
-  NOT?: Maybe<LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput>;
+  node?: Maybe<TitleWhereInput>;
+  AND?: Maybe<TitleSubscriptionWhereInput[] | TitleSubscriptionWhereInput>;
+  OR?: Maybe<TitleSubscriptionWhereInput[] | TitleSubscriptionWhereInput>;
+  NOT?: Maybe<TitleSubscriptionWhereInput[] | TitleSubscriptionWhereInput>;
 }
 
-export interface UserCreateWithoutLinksInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  email: String;
-  password: String;
+export interface AuthorUpdateDataInput {
+  fullName?: Maybe<String>;
 }
 
-export interface LinkUpdateManyDataInput {
-  description?: Maybe<String>;
-  url?: Maybe<String>;
-}
-
-export interface LinkUpdateInput {
-  description?: Maybe<String>;
-  url?: Maybe<String>;
-  postedBy?: Maybe<UserUpdateOneWithoutLinksInput>;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
+export type DirectionWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
-  email?: Maybe<String>;
 }>;
 
-export interface LinkUpdateManyWithoutPostedByInput {
-  create?: Maybe<
-    LinkCreateWithoutPostedByInput[] | LinkCreateWithoutPostedByInput
-  >;
-  delete?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
-  connect?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
-  set?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
-  disconnect?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
+export interface ProfessionCreateInput {
+  id?: Maybe<ID_Input>;
+  profession: String;
+}
+
+export interface AuthorSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<AuthorWhereInput>;
+  AND?: Maybe<AuthorSubscriptionWhereInput[] | AuthorSubscriptionWhereInput>;
+  OR?: Maybe<AuthorSubscriptionWhereInput[] | AuthorSubscriptionWhereInput>;
+  NOT?: Maybe<AuthorSubscriptionWhereInput[] | AuthorSubscriptionWhereInput>;
+}
+
+export interface ProfessionUpdateInput {
+  profession?: Maybe<String>;
+}
+
+export interface TitleUpdateManyMutationInput {
+  title?: Maybe<String>;
+}
+
+export interface ProfessionUpdateManyMutationInput {
+  profession?: Maybe<String>;
+}
+
+export interface SpecializationUpdateInput {
+  specialization?: Maybe<String>;
+}
+
+export interface ResourceCreateInput {
+  id?: Maybe<ID_Input>;
+  author?: Maybe<AuthorCreateManyInput>;
+  subAuthor?: Maybe<AuthorCreateManyInput>;
+  title?: Maybe<TitleCreateOneInput>;
+  direction?: Maybe<DirectionCreateOneInput>;
+  profession?: Maybe<ProfessionCreateOneInput>;
+  specialization?: Maybe<SpecializationCreateOneInput>;
+  udc?: Maybe<UdcCreateOneInput>;
+  content?: Maybe<ContentCreateOneInput>;
+}
+
+export interface ContentUpdateOneInput {
+  create?: Maybe<ContentCreateInput>;
+  update?: Maybe<ContentUpdateDataInput>;
+  upsert?: Maybe<ContentUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<ContentWhereUniqueInput>;
+}
+
+export type ContentWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface TitleWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  AND?: Maybe<TitleWhereInput[] | TitleWhereInput>;
+  OR?: Maybe<TitleWhereInput[] | TitleWhereInput>;
+  NOT?: Maybe<TitleWhereInput[] | TitleWhereInput>;
+}
+
+export interface TitleCreateOneInput {
+  create?: Maybe<TitleCreateInput>;
+  connect?: Maybe<TitleWhereUniqueInput>;
+}
+
+export interface SpecializationUpsertNestedInput {
+  update: SpecializationUpdateDataInput;
+  create: SpecializationCreateInput;
+}
+
+export interface TitleCreateInput {
+  id?: Maybe<ID_Input>;
+  title: String;
+}
+
+export interface ProfessionUpsertNestedInput {
+  update: ProfessionUpdateDataInput;
+  create: ProfessionCreateInput;
+}
+
+export interface DirectionCreateOneInput {
+  create?: Maybe<DirectionCreateInput>;
+  connect?: Maybe<DirectionWhereUniqueInput>;
+}
+
+export interface UdcSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<UdcWhereInput>;
+  AND?: Maybe<UdcSubscriptionWhereInput[] | UdcSubscriptionWhereInput>;
+  OR?: Maybe<UdcSubscriptionWhereInput[] | UdcSubscriptionWhereInput>;
+  NOT?: Maybe<UdcSubscriptionWhereInput[] | UdcSubscriptionWhereInput>;
+}
+
+export interface ProfessionCreateOneInput {
+  create?: Maybe<ProfessionCreateInput>;
+  connect?: Maybe<ProfessionWhereUniqueInput>;
+}
+
+export interface DirectionWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  code?: Maybe<String>;
+  code_not?: Maybe<String>;
+  code_in?: Maybe<String[] | String>;
+  code_not_in?: Maybe<String[] | String>;
+  code_lt?: Maybe<String>;
+  code_lte?: Maybe<String>;
+  code_gt?: Maybe<String>;
+  code_gte?: Maybe<String>;
+  code_contains?: Maybe<String>;
+  code_not_contains?: Maybe<String>;
+  code_starts_with?: Maybe<String>;
+  code_not_starts_with?: Maybe<String>;
+  code_ends_with?: Maybe<String>;
+  code_not_ends_with?: Maybe<String>;
+  AND?: Maybe<DirectionWhereInput[] | DirectionWhereInput>;
+  OR?: Maybe<DirectionWhereInput[] | DirectionWhereInput>;
+  NOT?: Maybe<DirectionWhereInput[] | DirectionWhereInput>;
+}
+
+export interface SpecializationCreateOneInput {
+  create?: Maybe<SpecializationCreateInput>;
+  connect?: Maybe<SpecializationWhereUniqueInput>;
+}
+
+export interface TitleUpdateInput {
+  title?: Maybe<String>;
+}
+
+export interface SpecializationCreateInput {
+  id?: Maybe<ID_Input>;
+  specialization: String;
+}
+
+export interface UdcUpdateDataInput {
+  udc?: Maybe<String>;
+}
+
+export interface UdcCreateOneInput {
+  create?: Maybe<UdcCreateInput>;
+  connect?: Maybe<UdcWhereUniqueInput>;
+}
+
+export interface SpecializationUpdateOneInput {
+  create?: Maybe<SpecializationCreateInput>;
+  update?: Maybe<SpecializationUpdateDataInput>;
+  upsert?: Maybe<SpecializationUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<SpecializationWhereUniqueInput>;
+}
+
+export interface AuthorUpdateManyInput {
+  create?: Maybe<AuthorCreateInput[] | AuthorCreateInput>;
   update?: Maybe<
-    | LinkUpdateWithWhereUniqueWithoutPostedByInput[]
-    | LinkUpdateWithWhereUniqueWithoutPostedByInput
+    | AuthorUpdateWithWhereUniqueNestedInput[]
+    | AuthorUpdateWithWhereUniqueNestedInput
   >;
   upsert?: Maybe<
-    | LinkUpsertWithWhereUniqueWithoutPostedByInput[]
-    | LinkUpsertWithWhereUniqueWithoutPostedByInput
+    | AuthorUpsertWithWhereUniqueNestedInput[]
+    | AuthorUpsertWithWhereUniqueNestedInput
   >;
-  deleteMany?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
+  delete?: Maybe<AuthorWhereUniqueInput[] | AuthorWhereUniqueInput>;
+  connect?: Maybe<AuthorWhereUniqueInput[] | AuthorWhereUniqueInput>;
+  set?: Maybe<AuthorWhereUniqueInput[] | AuthorWhereUniqueInput>;
+  disconnect?: Maybe<AuthorWhereUniqueInput[] | AuthorWhereUniqueInput>;
+  deleteMany?: Maybe<AuthorScalarWhereInput[] | AuthorScalarWhereInput>;
   updateMany?: Maybe<
-    LinkUpdateManyWithWhereNestedInput[] | LinkUpdateManyWithWhereNestedInput
+    | AuthorUpdateManyWithWhereNestedInput[]
+    | AuthorUpdateManyWithWhereNestedInput
   >;
 }
 
-export interface LinkUpsertWithWhereUniqueWithoutPostedByInput {
-  where: LinkWhereUniqueInput;
-  update: LinkUpdateWithoutPostedByDataInput;
-  create: LinkCreateWithoutPostedByInput;
+export interface ResourceUpdateInput {
+  author?: Maybe<AuthorUpdateManyInput>;
+  subAuthor?: Maybe<AuthorUpdateManyInput>;
+  title?: Maybe<TitleUpdateOneInput>;
+  direction?: Maybe<DirectionUpdateOneInput>;
+  profession?: Maybe<ProfessionUpdateOneInput>;
+  specialization?: Maybe<SpecializationUpdateOneInput>;
+  udc?: Maybe<UdcUpdateOneInput>;
+  content?: Maybe<ContentUpdateOneInput>;
 }
 
-export interface UserUpdateWithoutLinksDataInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
+export interface ContentCreateOneInput {
+  create?: Maybe<ContentCreateInput>;
+  connect?: Maybe<ContentWhereUniqueInput>;
 }
 
-export interface LinkUpdateWithWhereUniqueWithoutPostedByInput {
-  where: LinkWhereUniqueInput;
-  data: LinkUpdateWithoutPostedByDataInput;
+export interface UdcCreateInput {
+  id?: Maybe<ID_Input>;
+  udc: String;
 }
 
-export interface UserUpsertWithoutLinksInput {
-  update: UserUpdateWithoutLinksDataInput;
-  create: UserCreateWithoutLinksInput;
+export interface ProfessionUpdateOneInput {
+  create?: Maybe<ProfessionCreateInput>;
+  update?: Maybe<ProfessionUpdateDataInput>;
+  upsert?: Maybe<ProfessionUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<ProfessionWhereUniqueInput>;
 }
 
-export interface UserSubscriptionWhereInput {
+export interface UdcWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  udc?: Maybe<String>;
+  udc_not?: Maybe<String>;
+  udc_in?: Maybe<String[] | String>;
+  udc_not_in?: Maybe<String[] | String>;
+  udc_lt?: Maybe<String>;
+  udc_lte?: Maybe<String>;
+  udc_gt?: Maybe<String>;
+  udc_gte?: Maybe<String>;
+  udc_contains?: Maybe<String>;
+  udc_not_contains?: Maybe<String>;
+  udc_starts_with?: Maybe<String>;
+  udc_not_starts_with?: Maybe<String>;
+  udc_ends_with?: Maybe<String>;
+  udc_not_ends_with?: Maybe<String>;
+  AND?: Maybe<UdcWhereInput[] | UdcWhereInput>;
+  OR?: Maybe<UdcWhereInput[] | UdcWhereInput>;
+  NOT?: Maybe<UdcWhereInput[] | UdcWhereInput>;
+}
+
+export type ResourceWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface UdcUpdateInput {
+  udc?: Maybe<String>;
+}
+
+export interface ResourceSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-}
-
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  email: String;
-  password: String;
-  links?: Maybe<LinkCreateManyWithoutPostedByInput>;
-}
-
-export interface LinkCreateWithoutPostedByInput {
-  id?: Maybe<ID_Input>;
-  description: String;
-  url: String;
-}
-
-export interface UserUpdateInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  links?: Maybe<LinkUpdateManyWithoutPostedByInput>;
-}
-
-export interface UserWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  email?: Maybe<String>;
-  email_not?: Maybe<String>;
-  email_in?: Maybe<String[] | String>;
-  email_not_in?: Maybe<String[] | String>;
-  email_lt?: Maybe<String>;
-  email_lte?: Maybe<String>;
-  email_gt?: Maybe<String>;
-  email_gte?: Maybe<String>;
-  email_contains?: Maybe<String>;
-  email_not_contains?: Maybe<String>;
-  email_starts_with?: Maybe<String>;
-  email_not_starts_with?: Maybe<String>;
-  email_ends_with?: Maybe<String>;
-  email_not_ends_with?: Maybe<String>;
-  password?: Maybe<String>;
-  password_not?: Maybe<String>;
-  password_in?: Maybe<String[] | String>;
-  password_not_in?: Maybe<String[] | String>;
-  password_lt?: Maybe<String>;
-  password_lte?: Maybe<String>;
-  password_gt?: Maybe<String>;
-  password_gte?: Maybe<String>;
-  password_contains?: Maybe<String>;
-  password_not_contains?: Maybe<String>;
-  password_starts_with?: Maybe<String>;
-  password_not_starts_with?: Maybe<String>;
-  password_ends_with?: Maybe<String>;
-  password_not_ends_with?: Maybe<String>;
-  links_every?: Maybe<LinkWhereInput>;
-  links_some?: Maybe<LinkWhereInput>;
-  links_none?: Maybe<LinkWhereInput>;
-  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
-  OR?: Maybe<UserWhereInput[] | UserWhereInput>;
-  NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
-}
-
-export interface UserUpdateManyMutationInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-}
-
-export interface LinkUpdateWithoutPostedByDataInput {
-  description?: Maybe<String>;
-  url?: Maybe<String>;
-}
-
-export interface LinkScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  url?: Maybe<String>;
-  url_not?: Maybe<String>;
-  url_in?: Maybe<String[] | String>;
-  url_not_in?: Maybe<String[] | String>;
-  url_lt?: Maybe<String>;
-  url_lte?: Maybe<String>;
-  url_gt?: Maybe<String>;
-  url_gte?: Maybe<String>;
-  url_contains?: Maybe<String>;
-  url_not_contains?: Maybe<String>;
-  url_starts_with?: Maybe<String>;
-  url_not_starts_with?: Maybe<String>;
-  url_ends_with?: Maybe<String>;
-  url_not_ends_with?: Maybe<String>;
-  AND?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
-  OR?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
-  NOT?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
-}
-
-export interface LinkUpdateManyWithWhereNestedInput {
-  where: LinkScalarWhereInput;
-  data: LinkUpdateManyDataInput;
+  node?: Maybe<ResourceWhereInput>;
+  AND?: Maybe<
+    ResourceSubscriptionWhereInput[] | ResourceSubscriptionWhereInput
+  >;
+  OR?: Maybe<ResourceSubscriptionWhereInput[] | ResourceSubscriptionWhereInput>;
+  NOT?: Maybe<
+    ResourceSubscriptionWhereInput[] | ResourceSubscriptionWhereInput
+  >;
 }
 
 export interface NodeNode {
   id: ID_Output;
+}
+
+export interface UdcPreviousValues {
+  id: ID_Output;
+  udc: String;
+}
+
+export interface UdcPreviousValuesPromise
+  extends Promise<UdcPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  udc: () => Promise<String>;
+}
+
+export interface UdcPreviousValuesSubscription
+  extends Promise<AsyncIterator<UdcPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  udc: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateDirection {
+  count: Int;
+}
+
+export interface AggregateDirectionPromise
+  extends Promise<AggregateDirection>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateDirectionSubscription
+  extends Promise<AsyncIterator<AggregateDirection>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregateAuthor {
+  count: Int;
+}
+
+export interface AggregateAuthorPromise
+  extends Promise<AggregateAuthor>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateAuthorSubscription
+  extends Promise<AsyncIterator<AggregateAuthor>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface DirectionEdge {
+  node: Direction;
+  cursor: String;
+}
+
+export interface DirectionEdgePromise
+  extends Promise<DirectionEdge>,
+    Fragmentable {
+  node: <T = DirectionPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface DirectionEdgeSubscription
+  extends Promise<AsyncIterator<DirectionEdge>>,
+    Fragmentable {
+  node: <T = DirectionSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface BatchPayload {
@@ -505,204 +1261,561 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface UserPreviousValues {
-  id: ID_Output;
-  name: String;
-  email: String;
-  password: String;
+export interface DirectionConnection {
+  pageInfo: PageInfo;
+  edges: DirectionEdge[];
 }
 
-export interface UserPreviousValuesPromise
-  extends Promise<UserPreviousValues>,
+export interface DirectionConnectionPromise
+  extends Promise<DirectionConnection>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<DirectionEdge>>() => T;
+  aggregate: <T = AggregateDirectionPromise>() => T;
 }
 
-export interface UserPreviousValuesSubscription
-  extends Promise<AsyncIterator<UserPreviousValues>>,
+export interface DirectionConnectionSubscription
+  extends Promise<AsyncIterator<DirectionConnection>>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<DirectionEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateDirectionSubscription>() => T;
 }
 
-export interface LinkEdge {
-  node: Link;
+export interface UdcEdge {
+  node: Udc;
   cursor: String;
 }
 
-export interface LinkEdgePromise extends Promise<LinkEdge>, Fragmentable {
-  node: <T = LinkPromise>() => T;
+export interface UdcEdgePromise extends Promise<UdcEdge>, Fragmentable {
+  node: <T = UdcPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface LinkEdgeSubscription
-  extends Promise<AsyncIterator<LinkEdge>>,
+export interface UdcEdgeSubscription
+  extends Promise<AsyncIterator<UdcEdge>>,
     Fragmentable {
-  node: <T = LinkSubscription>() => T;
+  node: <T = UdcSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface User {
-  id: ID_Output;
-  name: String;
-  email: String;
-  password: String;
+export interface AggregateUdc {
+  count: Int;
 }
 
-export interface UserPromise extends Promise<User>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
-  links: <T = FragmentableArray<Link>>(args?: {
-    where?: LinkWhereInput;
-    orderBy?: LinkOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
+export interface AggregateUdcPromise
+  extends Promise<AggregateUdc>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-  links: <T = Promise<AsyncIterator<LinkSubscription>>>(args?: {
-    where?: LinkWhereInput;
-    orderBy?: LinkOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+  count: () => Promise<Int>;
 }
 
-export interface UserNullablePromise
-  extends Promise<User | null>,
+export interface AggregateUdcSubscription
+  extends Promise<AsyncIterator<AggregateUdc>>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
-  links: <T = FragmentableArray<Link>>(args?: {
-    where?: LinkWhereInput;
-    orderBy?: LinkOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface LinkConnection {
-  pageInfo: PageInfo;
-  edges: LinkEdge[];
-}
-
-export interface LinkConnectionPromise
-  extends Promise<LinkConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<LinkEdge>>() => T;
-  aggregate: <T = AggregateLinkPromise>() => T;
-}
-
-export interface LinkConnectionSubscription
-  extends Promise<AsyncIterator<LinkConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<LinkEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateLinkSubscription>() => T;
-}
-
-export interface LinkPreviousValues {
-  id: ID_Output;
-  description: String;
-  url: String;
-}
-
-export interface LinkPreviousValuesPromise
-  extends Promise<LinkPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  description: () => Promise<String>;
-  url: () => Promise<String>;
-}
-
-export interface LinkPreviousValuesSubscription
-  extends Promise<AsyncIterator<LinkPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  description: () => Promise<AsyncIterator<String>>;
-  url: () => Promise<AsyncIterator<String>>;
-}
-
-export interface LinkSubscriptionPayload {
+export interface TitleSubscriptionPayload {
   mutation: MutationType;
-  node: Link;
+  node: Title;
   updatedFields: String[];
-  previousValues: LinkPreviousValues;
+  previousValues: TitlePreviousValues;
 }
 
-export interface LinkSubscriptionPayloadPromise
-  extends Promise<LinkSubscriptionPayload>,
+export interface TitleSubscriptionPayloadPromise
+  extends Promise<TitleSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = LinkPromise>() => T;
+  node: <T = TitlePromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = LinkPreviousValuesPromise>() => T;
+  previousValues: <T = TitlePreviousValuesPromise>() => T;
 }
 
-export interface LinkSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<LinkSubscriptionPayload>>,
+export interface TitleSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<TitleSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = LinkSubscription>() => T;
+  node: <T = TitleSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = LinkPreviousValuesSubscription>() => T;
+  previousValues: <T = TitlePreviousValuesSubscription>() => T;
 }
 
-export interface Link {
+export interface UdcConnection {
+  pageInfo: PageInfo;
+  edges: UdcEdge[];
+}
+
+export interface UdcConnectionPromise
+  extends Promise<UdcConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UdcEdge>>() => T;
+  aggregate: <T = AggregateUdcPromise>() => T;
+}
+
+export interface UdcConnectionSubscription
+  extends Promise<AsyncIterator<UdcConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UdcEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUdcSubscription>() => T;
+}
+
+export interface Author {
   id: ID_Output;
-  description: String;
-  url: String;
+  fullName: String;
 }
 
-export interface LinkPromise extends Promise<Link>, Fragmentable {
+export interface AuthorPromise extends Promise<Author>, Fragmentable {
   id: () => Promise<ID_Output>;
-  description: () => Promise<String>;
-  url: () => Promise<String>;
-  postedBy: <T = UserPromise>() => T;
+  fullName: () => Promise<String>;
 }
 
-export interface LinkSubscription
-  extends Promise<AsyncIterator<Link>>,
+export interface AuthorSubscription
+  extends Promise<AsyncIterator<Author>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  description: () => Promise<AsyncIterator<String>>;
-  url: () => Promise<AsyncIterator<String>>;
-  postedBy: <T = UserSubscription>() => T;
+  fullName: () => Promise<AsyncIterator<String>>;
 }
 
-export interface LinkNullablePromise
-  extends Promise<Link | null>,
+export interface AuthorNullablePromise
+  extends Promise<Author | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  description: () => Promise<String>;
-  url: () => Promise<String>;
-  postedBy: <T = UserPromise>() => T;
+  fullName: () => Promise<String>;
+}
+
+export interface AggregateTitle {
+  count: Int;
+}
+
+export interface AggregateTitlePromise
+  extends Promise<AggregateTitle>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateTitleSubscription
+  extends Promise<AsyncIterator<AggregateTitle>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface TitleConnection {
+  pageInfo: PageInfo;
+  edges: TitleEdge[];
+}
+
+export interface TitleConnectionPromise
+  extends Promise<TitleConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<TitleEdge>>() => T;
+  aggregate: <T = AggregateTitlePromise>() => T;
+}
+
+export interface TitleConnectionSubscription
+  extends Promise<AsyncIterator<TitleConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TitleEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTitleSubscription>() => T;
+}
+
+export interface AuthorSubscriptionPayload {
+  mutation: MutationType;
+  node: Author;
+  updatedFields: String[];
+  previousValues: AuthorPreviousValues;
+}
+
+export interface AuthorSubscriptionPayloadPromise
+  extends Promise<AuthorSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = AuthorPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = AuthorPreviousValuesPromise>() => T;
+}
+
+export interface AuthorSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<AuthorSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = AuthorSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = AuthorPreviousValuesSubscription>() => T;
+}
+
+export interface SpecializationEdge {
+  node: Specialization;
+  cursor: String;
+}
+
+export interface SpecializationEdgePromise
+  extends Promise<SpecializationEdge>,
+    Fragmentable {
+  node: <T = SpecializationPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface SpecializationEdgeSubscription
+  extends Promise<AsyncIterator<SpecializationEdge>>,
+    Fragmentable {
+  node: <T = SpecializationSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AuthorPreviousValues {
+  id: ID_Output;
+  fullName: String;
+}
+
+export interface AuthorPreviousValuesPromise
+  extends Promise<AuthorPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  fullName: () => Promise<String>;
+}
+
+export interface AuthorPreviousValuesSubscription
+  extends Promise<AsyncIterator<AuthorPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  fullName: () => Promise<AsyncIterator<String>>;
+}
+
+export interface UdcSubscriptionPayload {
+  mutation: MutationType;
+  node: Udc;
+  updatedFields: String[];
+  previousValues: UdcPreviousValues;
+}
+
+export interface UdcSubscriptionPayloadPromise
+  extends Promise<UdcSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = UdcPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UdcPreviousValuesPromise>() => T;
+}
+
+export interface UdcSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UdcSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UdcSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UdcPreviousValuesSubscription>() => T;
+}
+
+export interface TitlePreviousValues {
+  id: ID_Output;
+  title: String;
+}
+
+export interface TitlePreviousValuesPromise
+  extends Promise<TitlePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+}
+
+export interface TitlePreviousValuesSubscription
+  extends Promise<AsyncIterator<TitlePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ResourceEdge {
+  node: Resource;
+  cursor: String;
+}
+
+export interface ResourceEdgePromise
+  extends Promise<ResourceEdge>,
+    Fragmentable {
+  node: <T = ResourcePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ResourceEdgeSubscription
+  extends Promise<AsyncIterator<ResourceEdge>>,
+    Fragmentable {
+  node: <T = ResourceSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ContentSubscriptionPayload {
+  mutation: MutationType;
+  node: Content;
+  updatedFields: String[];
+  previousValues: ContentPreviousValues;
+}
+
+export interface ContentSubscriptionPayloadPromise
+  extends Promise<ContentSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ContentPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ContentPreviousValuesPromise>() => T;
+}
+
+export interface ContentSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ContentSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ContentSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ContentPreviousValuesSubscription>() => T;
+}
+
+export interface AuthorConnection {
+  pageInfo: PageInfo;
+  edges: AuthorEdge[];
+}
+
+export interface AuthorConnectionPromise
+  extends Promise<AuthorConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<AuthorEdge>>() => T;
+  aggregate: <T = AggregateAuthorPromise>() => T;
+}
+
+export interface AuthorConnectionSubscription
+  extends Promise<AsyncIterator<AuthorConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<AuthorEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateAuthorSubscription>() => T;
+}
+
+export interface ContentPreviousValues {
+  id: ID_Output;
+  content: String;
+}
+
+export interface ContentPreviousValuesPromise
+  extends Promise<ContentPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  content: () => Promise<String>;
+}
+
+export interface ContentPreviousValuesSubscription
+  extends Promise<AsyncIterator<ContentPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  content: () => Promise<AsyncIterator<String>>;
+}
+
+export interface Specialization {
+  id: ID_Output;
+  specialization: String;
+}
+
+export interface SpecializationPromise
+  extends Promise<Specialization>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  specialization: () => Promise<String>;
+}
+
+export interface SpecializationSubscription
+  extends Promise<AsyncIterator<Specialization>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  specialization: () => Promise<AsyncIterator<String>>;
+}
+
+export interface SpecializationNullablePromise
+  extends Promise<Specialization | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  specialization: () => Promise<String>;
+}
+
+export interface Direction {
+  id: ID_Output;
+  code: String;
+}
+
+export interface DirectionPromise extends Promise<Direction>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  code: () => Promise<String>;
+}
+
+export interface DirectionSubscription
+  extends Promise<AsyncIterator<Direction>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  code: () => Promise<AsyncIterator<String>>;
+}
+
+export interface DirectionNullablePromise
+  extends Promise<Direction | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  code: () => Promise<String>;
+}
+
+export interface Resource {
+  id: ID_Output;
+}
+
+export interface ResourcePromise extends Promise<Resource>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  author: <T = FragmentableArray<Author>>(args?: {
+    where?: AuthorWhereInput;
+    orderBy?: AuthorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  subAuthor: <T = FragmentableArray<Author>>(args?: {
+    where?: AuthorWhereInput;
+    orderBy?: AuthorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  title: <T = TitlePromise>() => T;
+  direction: <T = DirectionPromise>() => T;
+  profession: <T = ProfessionPromise>() => T;
+  specialization: <T = SpecializationPromise>() => T;
+  udc: <T = UdcPromise>() => T;
+  content: <T = ContentPromise>() => T;
+}
+
+export interface ResourceSubscription
+  extends Promise<AsyncIterator<Resource>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  author: <T = Promise<AsyncIterator<AuthorSubscription>>>(args?: {
+    where?: AuthorWhereInput;
+    orderBy?: AuthorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  subAuthor: <T = Promise<AsyncIterator<AuthorSubscription>>>(args?: {
+    where?: AuthorWhereInput;
+    orderBy?: AuthorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  title: <T = TitleSubscription>() => T;
+  direction: <T = DirectionSubscription>() => T;
+  profession: <T = ProfessionSubscription>() => T;
+  specialization: <T = SpecializationSubscription>() => T;
+  udc: <T = UdcSubscription>() => T;
+  content: <T = ContentSubscription>() => T;
+}
+
+export interface ResourceNullablePromise
+  extends Promise<Resource | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  author: <T = FragmentableArray<Author>>(args?: {
+    where?: AuthorWhereInput;
+    orderBy?: AuthorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  subAuthor: <T = FragmentableArray<Author>>(args?: {
+    where?: AuthorWhereInput;
+    orderBy?: AuthorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  title: <T = TitlePromise>() => T;
+  direction: <T = DirectionPromise>() => T;
+  profession: <T = ProfessionPromise>() => T;
+  specialization: <T = SpecializationPromise>() => T;
+  udc: <T = UdcPromise>() => T;
+  content: <T = ContentPromise>() => T;
+}
+
+export interface DirectionSubscriptionPayload {
+  mutation: MutationType;
+  node: Direction;
+  updatedFields: String[];
+  previousValues: DirectionPreviousValues;
+}
+
+export interface DirectionSubscriptionPayloadPromise
+  extends Promise<DirectionSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = DirectionPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = DirectionPreviousValuesPromise>() => T;
+}
+
+export interface DirectionSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<DirectionSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = DirectionSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = DirectionPreviousValuesSubscription>() => T;
+}
+
+export interface ProfessionEdge {
+  node: Profession;
+  cursor: String;
+}
+
+export interface ProfessionEdgePromise
+  extends Promise<ProfessionEdge>,
+    Fragmentable {
+  node: <T = ProfessionPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ProfessionEdgeSubscription
+  extends Promise<AsyncIterator<ProfessionEdge>>,
+    Fragmentable {
+  node: <T = ProfessionSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface DirectionPreviousValues {
+  id: ID_Output;
+  code: String;
+}
+
+export interface DirectionPreviousValuesPromise
+  extends Promise<DirectionPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  code: () => Promise<String>;
+}
+
+export interface DirectionPreviousValuesSubscription
+  extends Promise<AsyncIterator<DirectionPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  code: () => Promise<AsyncIterator<String>>;
 }
 
 export interface PageInfo {
@@ -728,107 +1841,427 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateUser {
+export interface AggregateContent {
   count: Int;
 }
 
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
+export interface AggregateContentPromise
+  extends Promise<AggregateContent>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
+export interface AggregateContentSubscription
+  extends Promise<AsyncIterator<AggregateContent>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface UserEdge {
-  node: User;
+export interface Content {
+  id: ID_Output;
+  content: String;
+}
+
+export interface ContentPromise extends Promise<Content>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  content: () => Promise<String>;
+}
+
+export interface ContentSubscription
+  extends Promise<AsyncIterator<Content>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  content: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ContentNullablePromise
+  extends Promise<Content | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  content: () => Promise<String>;
+}
+
+export interface ProfessionSubscriptionPayload {
+  mutation: MutationType;
+  node: Profession;
+  updatedFields: String[];
+  previousValues: ProfessionPreviousValues;
+}
+
+export interface ProfessionSubscriptionPayloadPromise
+  extends Promise<ProfessionSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ProfessionPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ProfessionPreviousValuesPromise>() => T;
+}
+
+export interface ProfessionSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ProfessionSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ProfessionSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ProfessionPreviousValuesSubscription>() => T;
+}
+
+export interface AggregateSpecialization {
+  count: Int;
+}
+
+export interface AggregateSpecializationPromise
+  extends Promise<AggregateSpecialization>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateSpecializationSubscription
+  extends Promise<AsyncIterator<AggregateSpecialization>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ProfessionPreviousValues {
+  id: ID_Output;
+  profession: String;
+}
+
+export interface ProfessionPreviousValuesPromise
+  extends Promise<ProfessionPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  profession: () => Promise<String>;
+}
+
+export interface ProfessionPreviousValuesSubscription
+  extends Promise<AsyncIterator<ProfessionPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  profession: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateResource {
+  count: Int;
+}
+
+export interface AggregateResourcePromise
+  extends Promise<AggregateResource>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateResourceSubscription
+  extends Promise<AsyncIterator<AggregateResource>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ContentEdge {
+  node: Content;
   cursor: String;
 }
 
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
+export interface ContentEdgePromise extends Promise<ContentEdge>, Fragmentable {
+  node: <T = ContentPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
+export interface ContentEdgeSubscription
+  extends Promise<AsyncIterator<ContentEdge>>,
     Fragmentable {
-  node: <T = UserSubscription>() => T;
+  node: <T = ContentSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateLink {
+export interface Udc {
+  id: ID_Output;
+  udc: String;
+}
+
+export interface UdcPromise extends Promise<Udc>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  udc: () => Promise<String>;
+}
+
+export interface UdcSubscription
+  extends Promise<AsyncIterator<Udc>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  udc: () => Promise<AsyncIterator<String>>;
+}
+
+export interface UdcNullablePromise extends Promise<Udc | null>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  udc: () => Promise<String>;
+}
+
+export interface ResourceSubscriptionPayload {
+  mutation: MutationType;
+  node: Resource;
+  updatedFields: String[];
+  previousValues: ResourcePreviousValues;
+}
+
+export interface ResourceSubscriptionPayloadPromise
+  extends Promise<ResourceSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ResourcePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ResourcePreviousValuesPromise>() => T;
+}
+
+export interface ResourceSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ResourceSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ResourceSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ResourcePreviousValuesSubscription>() => T;
+}
+
+export interface AggregateProfession {
   count: Int;
 }
 
-export interface AggregateLinkPromise
-  extends Promise<AggregateLink>,
+export interface AggregateProfessionPromise
+  extends Promise<AggregateProfession>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateLinkSubscription
-  extends Promise<AsyncIterator<AggregateLink>>,
+export interface AggregateProfessionSubscription
+  extends Promise<AsyncIterator<AggregateProfession>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface UserSubscriptionPayload {
-  mutation: MutationType;
-  node: User;
-  updatedFields: String[];
-  previousValues: UserPreviousValues;
+export interface ResourcePreviousValues {
+  id: ID_Output;
 }
 
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
+export interface ResourcePreviousValuesPromise
+  extends Promise<ResourcePreviousValues>,
     Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = UserPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
+  id: () => Promise<ID_Output>;
 }
 
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+export interface ResourcePreviousValuesSubscription
+  extends Promise<AsyncIterator<ResourcePreviousValues>>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
+  id: () => Promise<AsyncIterator<ID_Output>>;
 }
 
-export interface UserConnection {
+export interface Profession {
+  id: ID_Output;
+  profession: String;
+}
+
+export interface ProfessionPromise extends Promise<Profession>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  profession: () => Promise<String>;
+}
+
+export interface ProfessionSubscription
+  extends Promise<AsyncIterator<Profession>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  profession: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ProfessionNullablePromise
+  extends Promise<Profession | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  profession: () => Promise<String>;
+}
+
+export interface SpecializationConnection {
   pageInfo: PageInfo;
-  edges: UserEdge[];
+  edges: SpecializationEdge[];
 }
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface SpecializationConnectionPromise
+  extends Promise<SpecializationConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
+  edges: <T = FragmentableArray<SpecializationEdge>>() => T;
+  aggregate: <T = AggregateSpecializationPromise>() => T;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface SpecializationConnectionSubscription
+  extends Promise<AsyncIterator<SpecializationConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<SpecializationEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateSpecializationSubscription>() => T;
 }
 
-/*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
+export interface AuthorEdge {
+  node: Author;
+  cursor: String;
+}
 
-export type Long = string;
+export interface AuthorEdgePromise extends Promise<AuthorEdge>, Fragmentable {
+  node: <T = AuthorPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface AuthorEdgeSubscription
+  extends Promise<AsyncIterator<AuthorEdge>>,
+    Fragmentable {
+  node: <T = AuthorSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface SpecializationPreviousValues {
+  id: ID_Output;
+  specialization: String;
+}
+
+export interface SpecializationPreviousValuesPromise
+  extends Promise<SpecializationPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  specialization: () => Promise<String>;
+}
+
+export interface SpecializationPreviousValuesSubscription
+  extends Promise<AsyncIterator<SpecializationPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  specialization: () => Promise<AsyncIterator<String>>;
+}
+
+export interface SpecializationSubscriptionPayload {
+  mutation: MutationType;
+  node: Specialization;
+  updatedFields: String[];
+  previousValues: SpecializationPreviousValues;
+}
+
+export interface SpecializationSubscriptionPayloadPromise
+  extends Promise<SpecializationSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = SpecializationPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = SpecializationPreviousValuesPromise>() => T;
+}
+
+export interface SpecializationSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<SpecializationSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = SpecializationSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = SpecializationPreviousValuesSubscription>() => T;
+}
+
+export interface ContentConnection {
+  pageInfo: PageInfo;
+  edges: ContentEdge[];
+}
+
+export interface ContentConnectionPromise
+  extends Promise<ContentConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ContentEdge>>() => T;
+  aggregate: <T = AggregateContentPromise>() => T;
+}
+
+export interface ContentConnectionSubscription
+  extends Promise<AsyncIterator<ContentConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ContentEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateContentSubscription>() => T;
+}
+
+export interface ResourceConnection {
+  pageInfo: PageInfo;
+  edges: ResourceEdge[];
+}
+
+export interface ResourceConnectionPromise
+  extends Promise<ResourceConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ResourceEdge>>() => T;
+  aggregate: <T = AggregateResourcePromise>() => T;
+}
+
+export interface ResourceConnectionSubscription
+  extends Promise<AsyncIterator<ResourceConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ResourceEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateResourceSubscription>() => T;
+}
+
+export interface TitleEdge {
+  node: Title;
+  cursor: String;
+}
+
+export interface TitleEdgePromise extends Promise<TitleEdge>, Fragmentable {
+  node: <T = TitlePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface TitleEdgeSubscription
+  extends Promise<AsyncIterator<TitleEdge>>,
+    Fragmentable {
+  node: <T = TitleSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ProfessionConnection {
+  pageInfo: PageInfo;
+  edges: ProfessionEdge[];
+}
+
+export interface ProfessionConnectionPromise
+  extends Promise<ProfessionConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ProfessionEdge>>() => T;
+  aggregate: <T = AggregateProfessionPromise>() => T;
+}
+
+export interface ProfessionConnectionSubscription
+  extends Promise<AsyncIterator<ProfessionConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ProfessionEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateProfessionSubscription>() => T;
+}
+
+export interface Title {
+  id: ID_Output;
+  title: String;
+}
+
+export interface TitlePromise extends Promise<Title>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+}
+
+export interface TitleSubscription
+  extends Promise<AsyncIterator<Title>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+}
+
+export interface TitleNullablePromise
+  extends Promise<Title | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+}
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
@@ -846,17 +2279,48 @@ The `Int` scalar type represents non-fractional signed whole numeric values. Int
 */
 export type Int = number;
 
+export type Long = string;
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
+
 /**
  * Model Metadata
  */
 
 export const models: Model[] = [
   {
-    name: "Link",
+    name: "Resource",
     embedded: false
   },
   {
-    name: "User",
+    name: "Author",
+    embedded: false
+  },
+  {
+    name: "Title",
+    embedded: false
+  },
+  {
+    name: "Direction",
+    embedded: false
+  },
+  {
+    name: "Profession",
+    embedded: false
+  },
+  {
+    name: "Specialization",
+    embedded: false
+  },
+  {
+    name: "Udc",
+    embedded: false
+  },
+  {
+    name: "Content",
     embedded: false
   }
 ];
