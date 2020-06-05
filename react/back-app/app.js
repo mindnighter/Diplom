@@ -4,7 +4,7 @@ const fs = require('fs');
 const pdf = require('pdf-parse');
 
 //thethis
-
+/* 
 app.get('/', function (req, res) {
   let dataBuffer = fs.readFileSync('./thethis.pdf');
 
@@ -52,7 +52,7 @@ app.get('/', function (req, res) {
   });
 
 });
-
+ */
 //bakalavr
 /* app.get('/', function (req, res) {
   let dataBuffer = fs.readFileSync('./bakalavr_2.pdf');
@@ -180,6 +180,52 @@ app.get('/', function (req, res) {
     //res.send(content);
   });
 }); */
+
+
+//Методичні посібники та рекомендації (АПЕПС)
+//metodical
+app.get('/', function (req, res) {
+  let dataBuffer = fs.readFileSync('./metoda_1.pdf');
+  pdf(dataBuffer).then(function (data) {
+    //content
+    // контен: "Загальна політика інформатизації є складовою частиною соціально-економічної  "
+    const start = new RegExp(/(ВСТУП\s{0,}\n|Вступ\s{0,}\n)/);
+    const end = new RegExp(/(РЕКОМЕНДОВАНА ЛІТЕРАТУРА \n|Список використаної літератури: \n)/);
+    const idxStart = data.text.search(start);
+    const idxEnd = data.text.search(end);
+    const content = data.text.slice(idxStart+5,idxEnd);
+    //title
+    // назва: "СОЦІАЛЬНО-ЕКОНОМІЧНИЙ ПОТЕНЦІАЛ  УПРАВЛІННЯ СТАНОМ ДОВКІЛЛЯ "
+    const startTit =new RegExp(/О(\"|\»)/);
+    const endTit = new RegExp(/\p{L}\s{0,}\n/gu);
+    const idxStartTit = data.text.search(startTit);
+    var strTit = data.text.slice(idxStartTit);
+    const idxEndTit = strTit.search(endTit);
+    const title =  strTit.slice(3,idxEndTit+1);
+
+    //author  
+    // авторы/автор : "Тарнавський Юрій Адамович, канд. фіз.-мат. наук, доц. Кузьменко Ігор Миколайович"
+    const startAut =new RegExp(/(Автори:|ладачі:)/);
+    const endAut ="Відповідальний";
+    const idxStartAut = data.text.search(startAut);
+    var strAut = data.text.slice(idxStartAut);
+    const idxEndAut  = strAut.indexOf(endAut);
+    const author  = strAut.slice(7,idxEndAut);
+
+    //editor
+    //Відповідальний редактор: Коваль О.В., канд. техн. наук, в.о. зав. кафедри автоматизації 
+    const startEdit ="редактор";
+    const endEdit ="Рецензент";
+    const idxStartEdit = data.text.indexOf(startEdit);
+    const idxEndEdit =  data.text.indexOf(endEdit);
+    const editor =  data.text.slice(idxStartEdit+9,idxEndEdit);
+    res.send(editor);
+    //res.send(author);
+    //res.send(content);
+
+  });
+});
+
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
