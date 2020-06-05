@@ -10,6 +10,11 @@ type Query {
   specializations: [Specialization!]
   udcs: [Udc!]
   contents: [Content!]
+  findResourceBy(
+    author: Boolean, subAuthor: Boolean, title: Boolean, direction: Boolean,
+    profession: Boolean, specialization: Boolean, udc: Boolean, content: Boolean, consist: String!
+  ): [Resource]
+  findResourceByTitle(consist: String!): [Resource]
 }
 
 type Mutation {
