@@ -212,14 +212,14 @@ app.get('/', function (req, res) {
     const idxEndAut  = strAut.indexOf(endAut);
     const author  = strAut.slice(7,idxEndAut);
 
-    //editor
+    //subAutor
     //Відповідальний редактор: Коваль О.В., канд. техн. наук, в.о. зав. кафедри автоматизації 
     const startEdit ="редактор";
     const endEdit ="Рецензент";
     const idxStartEdit = data.text.indexOf(startEdit);
     const idxEndEdit =  data.text.indexOf(endEdit);
-    const editor =  data.text.slice(idxStartEdit+9,idxEndEdit);
-    res.send(editor);
+    const subAutor =  data.text.slice(idxStartEdit+9,idxEndEdit);
+    res.send(subAutor);
     //res.send(author);
     //res.send(content);
 
