@@ -48,21 +48,7 @@ export default class Download extends React.Component {
   }
 
   DownloadDocument = () => {
-    document.getElementById('inputFile').click();
-  }
-
-  readFile = () => {
-    // const selectedFile = document.getElementById('inputFile').files[0];
-
-    // const reader = new FileReader
-    // reader.readAsArrayBuffer(selectedFile);
-    // reader.onload = async function (e) {
-    //   console.log(freader.result)
-    // };
-
-    // reader.onerror = function (e) {
-    //   console.log(e)
-    // };
+    document.getElementById(this.props.title).click();
   }
 
   Results = () => (
@@ -72,17 +58,17 @@ export default class Download extends React.Component {
           {(singleUpload, { data, loading }) => {
             console.log(data)
             return (<form onSubmit={() => { console.log("Submitted") }} encType={'multipart/form-data'}>
-              <input name={'document'} type={'file'} onChange={({ target: { files } }) => {
+              <input hidden id={this.props.title} name={'document'} type={'file'} onChange={({ target: { files } }) => {
                 const file = files[0]
                 console.log(this.props.type)
                 file && singleUpload({ variables: { file: file, type: this.props.type } })
-              }} />{loading && <p>Loading.....</p>}</form>)
+              }} /></form>)
           }
           }
         </Mutation>
       </ApolloProvider>
       <Card onClick={this.DownloadDocument} style={{ width: '18rem' }}>
-        <input hidden id="inputFile" type="file" onChange={this.readFile}></input>
+       
         <Card.Img
           variant="top" style={{ width: '286px' }} src={this.props.img} className='bg-light'
           onMouseOver={this.toggleChangeBackgroundImg} onMouseLeave={this.toggleChangeBackgroundImg} />
