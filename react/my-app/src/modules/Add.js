@@ -11,15 +11,18 @@ export default class Add extends React.Component {
       resourses: [
         {
           img: Document,
-          title: "Theses"
+          title: "Theses",
+          type: "THETHIS"
         },
         {
           img: Document,
-          title: "Bachelor Works"
+          title: "Bachelor Works",
+          type: "BAKALAVR"
         },
         {
           img: Document,
-          title: "Master Works"
+          title: "Master Works",
+          type: "MAGISTER"
         }
       ]
     }
@@ -47,7 +50,8 @@ export default class Add extends React.Component {
       <Col>
         <Download show={1}
           img={resourse.img}
-          title={resourse.title}>
+          title={resourse.title}
+          type={resourse.type}>
         </Download>
       </Col >
     );

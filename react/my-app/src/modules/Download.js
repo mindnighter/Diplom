@@ -1,5 +1,34 @@
 import React from 'react';
 import { Card } from "react-bootstrap"
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import { createUploadLink } from 'apollo-upload-client'
+import { ApolloClient } from "apollo-client"
+import { ApolloProvider, Mutation } from "react-apollo"
+import gql from "graphql-tag"
+
+const apolloCache = new InMemoryCache()
+
+const uploadLink = createUploadLink({
+  uri: 'http://localhost:4000/graphql', // Apollo Server is served from port 4000
+  headers: {
+    "keep-alive": "true"
+  }
+})
+
+const UPLOAD_FILE = gql`
+  mutation SingleUpload($file: Upload!, $type: String!) {
+    singleUpload(file: $file, type: $type) {
+      filename
+      mimetype
+      encoding
+    }
+  }
+`;
+
+const client = new ApolloClient({
+  cache: apolloCache,
+  link: uploadLink
+})
 
 export default class Download extends React.Component {
   constructor(props) {
@@ -23,63 +52,46 @@ export default class Download extends React.Component {
   }
 
   readFile = () => {
-    const selectedFile = document.getElementById('inputFile').files[0];
+    // const selectedFile = document.getElementById('inputFile').files[0];
 
-    const reader = new FileReader
-    reader.readAsArrayBuffer(selectedFile);
-    reader.onload = async function (e) {
-      console.log(freader.result)
-    };
+    // const reader = new FileReader
+    // reader.readAsArrayBuffer(selectedFile);
+    // reader.onload = async function (e) {
+    //   console.log(freader.result)
+    // };
 
-    reader.onerror = function (e) {
-      console.log(e)
-    };
+    // reader.onerror = function (e) {
+    //   console.log(e)
+    // };
   }
 
   Results = () => (
-    <Card onClick={this.DownloadDocument} style={{ width: '18rem' }}>
-      <input hidden id="inputFile" type="file" onChange={this.readFile}></input>
-      <Card.Img
-        variant="top" style={{ width: '286px' }} src={this.props.img} className='bg-light'
-        onMouseOver={this.toggleChangeBackgroundImg} onMouseLeave={this.toggleChangeBackgroundImg} />
-      <Card.Body>
-        <Card.Text className="h1 font-weight-bold text-center text-primary">{this.props.title}</Card.Text>
-      </Card.Body>
-    </Card>
+    <h2>
+      <ApolloProvider client={client}>
+        <Mutation mutation={UPLOAD_FILE}>
+          {(singleUpload, { data, loading }) => {
+            console.log(data)
+            return (<form onSubmit={() => { console.log("Submitted") }} encType={'multipart/form-data'}>
+              <input name={'document'} type={'file'} onChange={({ target: { files } }) => {
+                const file = files[0]
+                console.log(this.props.type)
+                file && singleUpload({ variables: { file: file, type: this.props.type } })
+              }} />{loading && <p>Loading.....</p>}</form>)
+          }
+          }
+        </Mutation>
+      </ApolloProvider>
+      <Card onClick={this.DownloadDocument} style={{ width: '18rem' }}>
+        <input hidden id="inputFile" type="file" onChange={this.readFile}></input>
+        <Card.Img
+          variant="top" style={{ width: '286px' }} src={this.props.img} className='bg-light'
+          onMouseOver={this.toggleChangeBackgroundImg} onMouseLeave={this.toggleChangeBackgroundImg} />
+        <Card.Body>
+          <Card.Text className="h1 font-weight-bold text-center text-primary">{this.props.title}</Card.Text>
+        </Card.Body>
+      </Card>
+    </h2>
   )
-
-  Utf8ArrayToStr = (array) => {
-    var out, i, len, c;
-    var char2, char3;
-    console.log(array)
-    out = "";
-    len = array.length;
-    i = 0;
-    while (i < len) {
-      c = array[i++];
-      switch (c >> 4) {
-        case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
-          // 0xxxxxxx
-          out += String.fromCharCode(c);
-          break;
-        case 12: case 13:
-          // 110x xxxx   10xx xxxx
-          char2 = array[i++];
-          out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));
-          break;
-        case 14:
-          // 1110 xxxx  10xx xxxx  10xx xxxx
-          char2 = array[i++];
-          char3 = array[i++];
-          out += String.fromCharCode(((c & 0x0F) << 12) |
-            ((char2 & 0x3F) << 6) |
-            ((char3 & 0x3F) << 0));
-          break;
-      }
-    }
-
-    return out;
-  }
 
   render() {
     let results
@@ -92,37 +104,4 @@ export default class Download extends React.Component {
 
     return results
   }
-}
-
-function Utf8ArrayToStr(array) {
-  var out, i, len, c;
-  var char2, char3;
-  console.log(array)
-  out = "";
-  len = array.length;
-  i = 0;
-  while (i < len) {
-    c = array[i++];
-    switch (c >> 4) {
-      case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
-        // 0xxxxxxx
-        out += String.fromCharCode(c);
-        break;
-      case 12: case 13:
-        // 110x xxxx   10xx xxxx
-        char2 = array[i++];
-        out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));
-        break;
-      case 14:
-        // 1110 xxxx  10xx xxxx  10xx xxxx
-        char2 = array[i++];
-        char3 = array[i++];
-        out += String.fromCharCode(((c & 0x0F) << 12) |
-          ((char2 & 0x3F) << 6) |
-          ((char3 & 0x3F) << 0));
-        break;
-    }
-  }
-
-  return out;
 }

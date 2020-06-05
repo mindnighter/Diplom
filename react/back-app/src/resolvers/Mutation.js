@@ -1,5 +1,9 @@
-const fs = require("fs")
+const fs = require('fs');
+const pdf = require('pdf-parse');
 const { fullResource } = require("../fragments/Resource")
+const { parseThethis } = require("../parsers/Thethis")
+const { parseMagister } = require("../parsers/Magister")
+const { parseBakalavr } = require("../parsers/Bakalavr")
 
 function postResource(parent, args, context, info) {
   const { author, subAuthor, title, direction, profession, specialization, udc, content } = args
@@ -48,17 +52,99 @@ function postResource(parent, args, context, info) {
   }).$fragment(fullResource)
 }
 
-function singleUpload(parent, args, context, info) {
-  return args.file.then(file => {
+async function createTheFile(file) {
+  return new Promise(resolve => {
+    //ToDo remove file from this, understand why 
     const { createReadStream, filename, mimetype } = file
 
-    const fileStream = createReadStream()
+    const readFileStream = createReadStream()
+    const readWriteStream = fs.createWriteStream(`./uploadedFiles/${filename}`)
+    readFileStream.pipe(readWriteStream)
+    readWriteStream.on('finish', () => {
+      resolve()
+    })
+  })
+}
 
-    fileStream.pipe(fs.createWriteStream(`./uploadedFiles/${filename}`))
+function singleUpload(parent, args, context, info) {
+  return args.file.then(async file => {
+    await createTheFile(file)
+    const { createReadStream, filename, mimetype } = file
+
+    //TODO rewrite
+    let result
+    if (args.type == "THETHIS") {
+      result = await parseThethis(`./uploadedFiles/${filename}`)
+    } else if (args.type == "BAKALAVR") {
+      result = await parseBakalavr(`./uploadedFiles/${filename}`)
+    } else if (args.type == "MAGISTER") {
+      result = await parseMagister(`./uploadedFiles/${filename}`)
+    }
+    const { author, subAuthor, title, direction, profession, specialization, udc, content } = result
+    const request = {}
+    if (author) {
+      request.author = {
+        create: {
+          fullName: author
+        }
+      }
+    }
+    if (subAuthor) {
+      request.subAuthor = {
+        create: {
+          fullName: subAuthor
+        }
+      }
+    }
+    if (title) {
+      request.title = {
+        create: {
+          title
+        }
+      }
+    }
+    if (direction) {
+      request.direction = {
+        create: {
+          code: direction
+        }
+      }
+    }
+    if (profession) {
+      request.profession = {
+        create: {
+          profession
+        }
+      }
+    }
+    if (specialization) {
+      request.specialization = {
+        create: {
+          specialization
+        }
+      }
+    }
+    if (udc) {
+      request.udc = {
+        create: {
+          udc
+        }
+      }
+    }
+    if (content) {
+      request.content = {
+        create: {
+          content
+        }
+      }
+    }
+    console.log(request)
+    // console.log(await context.prisma.createResource({ ...request }).$fragment(fullResource))
 
     return file;
   });
 }
+
 module.exports = {
   postResource,
   singleUpload

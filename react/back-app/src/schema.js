@@ -17,7 +17,7 @@ type Mutation {
     author: String, subAuthor: String, title: String, direction: String,
     profession: String, specialization: String, udc: String, content: String
   ): Resource,
-  singleUpload(file: Upload!): File!,
+  singleUpload(file: Upload!, type: String!): File!,
 }
 
 type File {
