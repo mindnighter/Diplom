@@ -41,7 +41,18 @@ function parseThethis(path) {
       const idxEnd = works[i].indexOf(end);
       content.push(works[i].slice(idxStart + 1, idxEnd));
     }
-    return { author, subAuthor, title, udc: UDCs, content }
+    const res = []
+    for (let i = 0; i < author.length; i++) {
+      res.push({
+        author: author[i],
+        author: subAuthor[i],
+        title: title[i],
+        udc: UDCs[i],
+        content: content[i]
+      })
+    }
+
+    return res
   })
 }
 

@@ -12,7 +12,7 @@ function find(searchData, consist) {
   for (let i = 0; i < searchData.length; i++) {
     let counter = 0
 
-    for (let j = 0; j < consist.length; j++) {
+    for (let j = 0; j < consist.length && i + j < searchData.length; j++) {
       if (searchData[i + j].toUpperCase() == consist[j].toUpperCase()) {
         counter++
       } else {
@@ -86,7 +86,6 @@ async function findResourceBy(parent, args, context, info) {
     const filteredTitles = titles.filter(title => {
       return find(title.title, consist)
     })
-
     for (const title of filteredTitles) {
       results.push((await context.prisma
         .resources({ where: { title: { id: title.id } } })
@@ -128,6 +127,7 @@ async function findResourceBy(parent, args, context, info) {
   //     }
   //   }
   // }
+
   return results
 }
 

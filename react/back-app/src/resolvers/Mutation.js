@@ -80,65 +80,130 @@ function singleUpload(parent, args, context, info) {
     } else if (args.type == "MAGISTER") {
       result = await parseMagister(`./uploadedFiles/${filename}`)
     }
-    const { author, subAuthor, title, direction, profession, specialization, udc, content } = result
-    const request = {}
-    if (author) {
-      request.author = {
-        create: {
-          fullName: author
+    if (args.type == "THETHIS") {
+      result.forEach(async res => {
+        const { author, subAuthor, title, direction, profession, specialization, udc, content } = res
+        const request = {}
+        if (author) {
+          request.author = {
+            create: {
+              fullName: author
+            }
+          }
+        }
+        if (subAuthor) {
+          request.subAuthor = {
+            create: {
+              fullName: subAuthor
+            }
+          }
+        }
+        if (title) {
+          request.title = {
+            create: {
+              title
+            }
+          }
+        }
+        if (direction) {
+          request.direction = {
+            create: {
+              code: direction
+            }
+          }
+        }
+        if (profession) {
+          request.profession = {
+            create: {
+              profession
+            }
+          }
+        }
+        if (specialization) {
+          request.specialization = {
+            create: {
+              specialization
+            }
+          }
+        }
+        if (udc) {
+          request.udc = {
+            create: {
+              udc
+            }
+          }
+        }
+        if (content) {
+          request.content = {
+            create: {
+              content
+            }
+          }
+        }
+        await context.prisma.createResource({ ...request }).$fragment(fullResource)
+      })
+    } else {
+      const { author, subAuthor, title, direction, profession, specialization, udc, content } = result
+      const request = {}
+      if (author) {
+        request.author = {
+          create: {
+            fullName: author
+          }
         }
       }
-    }
-    if (subAuthor) {
-      request.subAuthor = {
-        create: {
-          fullName: subAuthor
+      if (subAuthor) {
+        request.subAuthor = {
+          create: {
+            fullName: subAuthor
+          }
         }
       }
-    }
-    if (title) {
-      request.title = {
-        create: {
-          title
+      if (title) {
+        request.title = {
+          create: {
+            title
+          }
         }
       }
-    }
-    if (direction) {
-      request.direction = {
-        create: {
-          code: direction
+      if (direction) {
+        request.direction = {
+          create: {
+            code: direction
+          }
         }
       }
-    }
-    if (profession) {
-      request.profession = {
-        create: {
-          profession
+      if (profession) {
+        request.profession = {
+          create: {
+            profession
+          }
         }
       }
-    }
-    if (specialization) {
-      request.specialization = {
-        create: {
-          specialization
+      if (specialization) {
+        request.specialization = {
+          create: {
+            specialization
+          }
         }
       }
-    }
-    if (udc) {
-      request.udc = {
-        create: {
-          udc
+      if (udc) {
+        request.udc = {
+          create: {
+            udc
+          }
         }
       }
-    }
-    if (content) {
-      request.content = {
-        create: {
-          content
+      if (content) {
+        request.content = {
+          create: {
+            content
+          }
         }
       }
+      await context.prisma.createResource({ ...request }).$fragment(fullResource)
+
     }
-    await context.prisma.createResource({ ...request }).$fragment(fullResource)
 
     return file;
   });

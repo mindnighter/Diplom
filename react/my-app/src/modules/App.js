@@ -31,8 +31,12 @@ export default class App extends React.Component {
   };
 
   Documents = (result) => {
-    this.setState({ dataDocuments: result.data });
-    this.setState({ showDocuments: true });
+    console.log(result.data)
+    if (result.data) {
+      this.setState({ dataDocuments: result.data });
+      this.setState({ showDocuments: true });
+    }
+
   }
 
   Add = () => {
@@ -80,23 +84,21 @@ export default class App extends React.Component {
               </Nav>
             </Col>
             <Col className="mt-3" sm={11} >
+              <Add show={this.state.showAddOptions}></Add>
               <Switch>
                 <Route path="/theses">
                   <Search Documents={this.Documents} show={this.state.showSearch}></Search>
                   <SearchOptions Search={this.Search} show={this.state.showSearchOptions}></SearchOptions>
-                  <Add show={this.state.showAddOptions}></Add>
                   <Documents show={this.state.showDocuments} data={this.state.dataDocuments}></Documents>
                 </Route>
                 <Route path="/bachelor-works">
                   <Search Documents={this.Documents} show={this.state.showSearch}></Search>
                   <SearchOptions Search={this.Search} show={this.state.showSearchOptions}></SearchOptions>
-                  <Add show={this.state.showAddOptions}></Add>
                   <Documents show={this.state.showDocuments} data={this.state.dataDocuments}></Documents>
                 </Route>
                 <Route path="/master-works">
                   <Search Documents={this.Documents} show={this.state.showSearch}></Search>
                   <SearchOptions Search={this.Search} show={this.state.showSearchOptions}></SearchOptions>
-                  <Add show={this.state.showAddOptions}></Add>
                   <Documents show={this.state.showDocuments} data={this.state.dataDocuments}></Documents>
                 </Route>
               </Switch>

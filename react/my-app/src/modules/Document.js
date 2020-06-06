@@ -11,7 +11,7 @@ export default class Document extends React.Component {
       <Card.Body>
         <Card.Title>Автор: {this.props.author}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">Назва: {this.props.title}</Card.Subtitle>
-        <Card.Text>Зміст: {this.props.content}</Card.Text>
+        {/* <Card.Text>Зміст: {this.props.content}</Card.Text> */}
         <Card.Link href="#">Завантажити документ</Card.Link>
       </Card.Body>
     </Card>
