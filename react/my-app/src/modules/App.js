@@ -13,8 +13,9 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showSearch: false,
+      showSearch: true,
       showDocuments: false,
+      dataDocuments: null,
       showSearchOptions: false,
       showAddOptions: false
     };
@@ -29,7 +30,8 @@ export default class App extends React.Component {
     this.setState({ showSearch: true });
   };
 
-  Documents = () => {
+  Documents = (result) => {
+    this.setState({ dataDocuments: result.data });
     this.setState({ showDocuments: true });
   }
 
@@ -78,18 +80,24 @@ export default class App extends React.Component {
               </Nav>
             </Col>
             <Col className="mt-3" sm={11} >
-              <Search Documents={this.Documents} show={this.state.showSearch}></Search>
-              <SearchOptions Search={this.Search} show={this.state.showSearchOptions}></SearchOptions>
-              <Add show={this.state.showAddOptions}></Add>
               <Switch>
                 <Route path="/theses">
-                  <Documents show={this.state.showDocuments}></Documents>
+                  <Search Documents={this.Documents} show={this.state.showSearch}></Search>
+                  <SearchOptions Search={this.Search} show={this.state.showSearchOptions}></SearchOptions>
+                  <Add show={this.state.showAddOptions}></Add>
+                  <Documents show={this.state.showDocuments} data={this.state.dataDocuments}></Documents>
                 </Route>
                 <Route path="/bachelor-works">
-                  <Documents show={this.state.showDocuments}></Documents>
+                  <Search Documents={this.Documents} show={this.state.showSearch}></Search>
+                  <SearchOptions Search={this.Search} show={this.state.showSearchOptions}></SearchOptions>
+                  <Add show={this.state.showAddOptions}></Add>
+                  <Documents show={this.state.showDocuments} data={this.state.dataDocuments}></Documents>
                 </Route>
                 <Route path="/master-works">
-                  <Documents show={this.state.showDocuments}></Documents>
+                  <Search Documents={this.Documents} show={this.state.showSearch}></Search>
+                  <SearchOptions Search={this.Search} show={this.state.showSearchOptions}></SearchOptions>
+                  <Add show={this.state.showAddOptions}></Add>
+                  <Documents show={this.state.showDocuments} data={this.state.dataDocuments}></Documents>
                 </Route>
               </Switch>
             </Col>
@@ -99,19 +107,31 @@ export default class App extends React.Component {
     );
   }
 
-  // async componentDidMount() {
-  //   // Load async data.
-  //   let userData = await api.get('/', {
-  //     params: {
-  //       results: 1,
-  //       inc: 'name,email,picture'
-  //     }
-  //   });
-  //   // Парсим резульатты.
-  //   userData = userData.data.results[0];
-  //   // Обновляем стейт и ререндерим наш компонент.
-  //   const name = `${userData.name.first} ${userData.name.last}`;
+  //   async componentDidMount() {
+  //     const query = `{
+  //       findResourceBy(
+  //         consist: "програмного", 
+  //         author: true, 
+  //         title:true
+  //       )
+  //      {
+  //         author {
+  //           fullName
+  //         }
+  //         title {
+  //           title
+  //         }
+  //       }
+  //     }`
 
-  //   console.log(name);
-  // }
+  //     api({
+  //       method: 'post',
+  //       data: {
+  //         query
+  //       }
+  //     }).then((result) => {
+  //       console.log(result.data)
+  //     });
+
+  //   }
 }

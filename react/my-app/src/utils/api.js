@@ -2,6 +2,6 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://randomuser.me/api/",
+  baseURL: "http://localhost:4000/graphql",
   responseType: "json"
 });

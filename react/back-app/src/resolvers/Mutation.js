@@ -138,8 +138,7 @@ function singleUpload(parent, args, context, info) {
         }
       }
     }
-    console.log(request)
-    // console.log(await context.prisma.createResource({ ...request }).$fragment(fullResource))
+    await context.prisma.createResource({ ...request }).$fragment(fullResource)
 
     return file;
   });

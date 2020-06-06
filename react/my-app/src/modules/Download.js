@@ -52,7 +52,7 @@ export default class Download extends React.Component {
   }
 
   Results = () => (
-    <h2>
+    <Card onClick={this.DownloadDocument} style={{ width: '18rem' }} >
       <ApolloProvider client={client}>
         <Mutation mutation={UPLOAD_FILE}>
           {(singleUpload, { data, loading }) => {
@@ -60,23 +60,19 @@ export default class Download extends React.Component {
             return (<form onSubmit={() => { console.log("Submitted") }} encType={'multipart/form-data'}>
               <input hidden id={this.props.title} name={'document'} type={'file'} onChange={({ target: { files } }) => {
                 const file = files[0]
-                console.log(this.props.type)
                 file && singleUpload({ variables: { file: file, type: this.props.type } })
               }} /></form>)
           }
           }
         </Mutation>
       </ApolloProvider>
-      <Card onClick={this.DownloadDocument} style={{ width: '18rem' }}>
-       
-        <Card.Img
-          variant="top" style={{ width: '286px' }} src={this.props.img} className='bg-light'
-          onMouseOver={this.toggleChangeBackgroundImg} onMouseLeave={this.toggleChangeBackgroundImg} />
-        <Card.Body>
-          <Card.Text className="h1 font-weight-bold text-center text-primary">{this.props.title}</Card.Text>
-        </Card.Body>
-      </Card>
-    </h2>
+      <Card.Img
+        variant="top" style={{ width: '286px' }} src={this.props.img} className='bg-light'
+        onMouseOver={this.toggleChangeBackgroundImg} onMouseLeave={this.toggleChangeBackgroundImg} />
+      <Card.Body>
+        <Card.Text className="h1 font-weight-bold text-center text-primary">{this.props.title}</Card.Text>
+      </Card.Body>
+    </Card>
   )
 
   render() {
