@@ -58,12 +58,8 @@ export default class App extends React.Component {
               <Nav.Link >
                 <Link to="/">ТЕПЛОЕНЕРГЕТИЧНИЙ ФАКУЛЬТЕТ НТУУ «КПI імені Ігоря Сікорського»</Link>
               </Nav.Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item>Action</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item>Separated link</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={this.Add} >Add</NavDropdown.Item>
+              <NavDropdown title="Опції" id="basic-nav-dropdown">
+                <NavDropdown.Item onClick={this.Add} >Додати</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
@@ -73,13 +69,13 @@ export default class App extends React.Component {
             <Col sm={1}>
               <Nav className="flex-column">
                 <Nav.Link >
-                  <Link to="/theses">Theses</Link>
+                  <Link to="/theses">Тези</Link>
                 </Nav.Link>
                 <Nav.Link >
-                  <Link to="/bachelor-works">Bachelor Works</Link>
+                  <Link to="/bachelor-works">Бакалаврські роботи</Link>
                 </Nav.Link>
                 <Nav.Link >
-                  <Link to="/master-works">Master Works</Link>
+                  <Link to="/master-works">Магістерські роботи</Link>
                 </Nav.Link>
               </Nav>
             </Col>

@@ -25,11 +25,11 @@ export default class Search extends React.Component {
   };
   Results = () => (
     <Container fluid>
-      <Form>
+      <Form onSubmit={this.SearchBy}>
         <InputGroup className="mb-3 mt-3">
-          <FormControl ref={this.textInput} type="text" placeholder="Enter information for searching" disabled={this.state.disabled} />
+          <FormControl ref={this.textInput} type="text" placeholder="Введіть інформацію для пошуку" disabled={this.state.disabled} />
           <InputGroup.Append>
-            <Button onClick={this.SearchBy}>Search</Button>
+            <Button onClick={this.SearchBy}>Пошук</Button>
           </InputGroup.Append>
         </InputGroup>
         {['radio'].map((type) => (
@@ -37,7 +37,7 @@ export default class Search extends React.Component {
             <Form.Check
               custom
               inline
-              label="author"
+              label="автор"
               type={type}
               id={`author`}
               onChange={this.handleChange}
@@ -45,7 +45,7 @@ export default class Search extends React.Component {
             <Form.Check
               custom
               inline
-              label="subAuthor"
+              label="керівник"
               type={type}
               id={`subAuthor`}
               onChange={this.handleChange}
@@ -53,7 +53,7 @@ export default class Search extends React.Component {
             <Form.Check
               custom
               inline
-              label="title"
+              label="назва"
               type={type}
               id={`title`}
               onChange={this.handleChange}
@@ -61,23 +61,23 @@ export default class Search extends React.Component {
             <Form.Check
               custom
               inline
-              label="direction"
+              label="направлення"
               type={type}
               id={`direction`}
               onChange={this.handleChange}
             />
-            <Form.Check
+            {/* <Form.Check
               custom
               inline
-              label="profession"
+              label="професія"
               type={type}
               id={`profession`}
               onChange={this.handleChange}
-            />
+            /> */}
             <Form.Check
               custom
               inline
-              label="specialization"
+              label="спеціалізація"
               type={type}
               id={`specialization`}
               onChange={this.handleChange}
@@ -85,7 +85,7 @@ export default class Search extends React.Component {
             <Form.Check
               custom
               inline
-              label="udc"
+              label="УДК"
               type={type}
               id={`udc`}
               onChange={this.handleChange}
@@ -93,7 +93,7 @@ export default class Search extends React.Component {
             <Form.Check
               custom
               inline
-              label="content"
+              label="контент"
               type={type}
               id={`content`}
               onChange={this.handleChange}
@@ -116,7 +116,8 @@ export default class Search extends React.Component {
     return results
   }
 
-  SearchBy = async () => {
+  SearchBy = async (event) => {
+    event.preventDefault();
     const consist = `"${this.textInput.current.value}"`
     const author = this.state.author
     const subAuthor = this.state.subAuthor
@@ -156,7 +157,47 @@ export default class Search extends React.Component {
     }).then((result) => {
       this.props.Documents(result)
     });
+  }
 
+  async componentDidMount() {
+    const author = true
+    const subAuthor = this.state.subAuthor
+    const direction = this.state.direction
+    const profession = this.state.profession
+    const specialization = this.state.specialization
+    const udc = this.state.udc
+    const content = this.state.content
+    const title = true
+
+    const query = `{
+      findResourceBy(
+        consist: "a",
+        author: ${author},
+        title: ${title},
+        subAuthor: ${subAuthor},
+        direction: ${direction},
+        profession: ${profession},
+        specialization: ${specialization},
+        udc: ${udc},
+        content: ${content},
+      )
+     {
+        author {
+          fullName
+        }
+        title {
+          title
+        }
+      }
+    }`
+    api({
+      method: 'post',
+      data: {
+        query
+      }
+    }).then((result) => {
+      this.props.Documents(result)
+    });
   }
 }
 
